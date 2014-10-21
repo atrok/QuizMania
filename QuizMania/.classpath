@@ -6,5 +6,10 @@
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
+	<classpathentry kind="lib" path="D:/Projects/super-csv/super-csv-2.2.0.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/atrok/Downloads/super-csv-distribution-2.2.0-bin.zip!/super-csv"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -22,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.quizmania.repository.GameRepository;
 
 
-@EnableJpaRepositories(basePackageClasses = GameRepository.class)
+@EnableJpaRepositories(basePackages = "com.quizmania.repository")
 //Tell Spring that this object represents a Configuration for the
 //application
 //Tell Spring to automatically inject any dependencies that are marked in

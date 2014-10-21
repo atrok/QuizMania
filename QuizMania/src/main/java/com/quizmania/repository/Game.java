@@ -21,6 +21,7 @@ public class Game {
 	private Map<String, String>  var4;
 	private long  answer;
 	private String description;
+	private int rate;
 	
 	public Game(){}
 

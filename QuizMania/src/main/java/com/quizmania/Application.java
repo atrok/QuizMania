@@ -4,7 +4,6 @@ import java.io.File;
 
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -19,7 +18,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.quizmania.repository.GameRepository;
+import com.quizmania.server.GameRepositoryInit;
+
+
 
 
 @EnableJpaRepositories(basePackages = "com.quizmania.repository")
@@ -62,6 +63,7 @@ public class Application {
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+		GameRepositoryInit.create();
 	}
 
 	

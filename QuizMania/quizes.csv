@@ -1,0 +1,34 @@
+var1,var2,var3,var4,answer,description,rates
+American Pie,Mean Girls,Titanic,The Breakfast Club,3,By Genre: Titanic is not a High school movie,0
+The Hunger Games,Breakfast at Tiffanies,Slumdog Millionaire,Django Unchained,2,"By Age: While the others movies are quite recent, Breakfast at tiffanies is a very old movie",0
+Unbreakable,The Sixth Sense,The Village,12 Monkeys,4,By Director: 12 Monkeys is not by M. Night Shyamalan,0
+Monsters Inc.,Toy Story,Shrek,Finding Nemo,3,By Studio: Shrek is not by Pixar,0
+Zombieland,Saw,Dawn of the Dead,28 Days Later,2,By Subgenre: Saw is not a zombie movie,0
+The Shining,Pet Sematary,It,Poltergeist,4,By Writer: Poltergeist is not based on a Stephen King book,0
+The Matrix,X-Men: Days of Future Past,Forrest Gump,Lucy,4,By Genre: Forrest Gump is not a science Fiction movie,0
+Taken,Run,Leon: The Professional,The Transporter,3,By Director: Leon: The Professional is not by Luc Besson,0
+Mad Max,The Year of Living Dangerously,Braveheart,Revolutionary Road,4,By Actor: Revolutionary Road is without Mel Gibson,0
+Avatar,Spiderman,Superman,My Name is Khan,4,By Origin: My Name is Khan is the only Bollywood movie,0
+House of Wax,Cast Away,Paa,What Lies Beneath,3,By Origin: Paa is the only Bollywood movie,
+Maverick,Rounders,21,Good Will Hunting,4,By Genre: Good Will Hunting is not a card movie,
+Red State,Clerks,Tusk,Office Space,4,By Director: Kevin Smith has directed all the movies except Office Space.,
+Titanic,Gladiator,American Beauty,King's Speech,1,"By Oscar Win: All the rest, won best movie and best Actor ",
+München ,The Last King of Scotland,Argo,The Town,4,By Background: The Town is the only one not based on a real life event,
+The Matador,GoldenEye,Moonraker,GoldenEye,1,By Character: The Matador is not a James Bond movie,
+The Pledge,The Wolf of Wall Street,Mars Attacks!,One Flew Over the Cuckoo's Nest,2,By Actor: The Wolf of Wall Street is the only one without Jack Nicholson ,
+JFK,Sleepers,Goodfellas,A Few Good Men,3,By Actor: Kevin Bacon does not appear in Goodfellas.,
+Ghosts of Mississippi,JFK,This is Spinal Tap,Stand By Me,2,By Director: Rob Reiner did not direct JFK.,
+Tom Jones,Rocky,Citizen Kane,The Greatest Show on Earth,3,By Oscar Win: Citizen Kane did not win Best Picture,
+James Mason,Cary Grant,Rod Taylor,Sean Connery,4,By Actor: All but Sean Connery turned down the James Bond role.,
+Waterworld,Gigli,The Postman,Mars Needs Moms,1,"By Success: While Waterworld is considered a flop, it actually turned a significant profit. The others lost money.",
+Superman,Batman,Spiderman,Hulk,2,"Batman do not have any 'super' powers",
+The Thomas Crowne Affair,Entrapment,Cowboys vs. Aliens,Master and Commander: The Far Side of the World,4,All but Master and Commander: The Far Side of the World featured an actor who played James Bond,
+Kill Bill Vol1,Reservoir Dogs,Inglorious Basterds,Schindler's List,4,By Director: Quentin Tarantino did not worked in Schindler's List,
+Jaws,E.T.,Jurassic Park,King Kong,4,By Director: King Kong was not directed by Steven Spielberg,
+Terminator,Commando,Rocky,Predator,4,By Actor: Arnold Schwarzenegger was not in Rocky,
+Saving Private Ryan,Black Hawk Down,La Vita e bella,The thin red line,2,By Subgenre: Black Hawk Down is not set in World War II,
+Roman Polanski,Stanley Kubric,Steven Spielberg,Martin Scorcese,2,By Director: All but Stanley Kubric are alive,
+The Matrix,Pulp Fiction,Mad Max,The Godfather,2,By Movie Trilogy: Pulp Fiction is the only one not part of a trilogy,
+Black Swan,Melancholia,Virgin Suicides,Marie Antoinette,1,By Actor: Black Swan is starred by Natalie Portman while the others are starred by Kirsten Dunst,
+Training Day,Man on Fire,Departed,Deja Vu,3,By Actor: Denzel Washington does not appear in Departed,
+A Dangerous Method ,Inglourious Basterds,Prometheus,The Grand Budapest Hotel,4,By Actor: Michael Fassbender appears in all but The Grand Budapest Hotel where Ralph Fiennes stars,

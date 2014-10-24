@@ -63,7 +63,7 @@ public class Application {
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		GameRepositoryInit.create();
+		//GameRepositoryInit.create();
 	}
 
 	
@@ -107,7 +107,7 @@ public class Application {
 		                    new TomcatConnectorCustomizer() {
 								@Override
 								public void customize(Connector connector) {
-									connector.setPort(8443);
+									connector.setPort(8445);
 			                        connector.setSecure(true);
 			                        connector.setScheme("https");
 

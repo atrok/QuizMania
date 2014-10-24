@@ -3,6 +3,7 @@ package com.quizmania.server;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -11,6 +12,8 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.google.common.collect.Lists;
 import com.quizmania.repository.Game;
 import com.quizmania.repository.GameRepository;
 import com.quizmania.util.ConfigurationUtil;
@@ -23,7 +26,7 @@ public class TestGameSvcApi {
 
 	private final static Logger logger=Logger.getLogger(TestGameSvcApi.class);
 	List<Game> quiz = null;
-	Set<String> SetOfUUID = null;
+	Set<String> SetOfUUID = new HashSet<String>();
 	
 	@Mock
 	GameRepository games;
@@ -37,7 +40,7 @@ public class TestGameSvcApi {
 		MockitoAnnotations.initMocks(this);
 		// adding Mock repository
 		GameRepositoryInit.addRepository(games);
-		
+		gamecontroller.addRepository(games);
 		
 			try{
 				GameRepositoryInit.create();
@@ -54,28 +57,15 @@ public class TestGameSvcApi {
 
 		
 		Game g = Game.getBuilder("test", "test2", "test3", "test4", 2, "test quiz: answer 2", 0).build();
-
+		g.setId(ConfigurationUtil.getUUID());
 		boolean ok = gamecontroller.addGameRecord(g);
 
 		// Test the servlet directly, without going through the network.
 
 		assertTrue(ok);
 
-		List<Game> games = gamecontroller.getListofGames();
-		assertTrue(games.contains(g));
+		List<Game> gameslist = Lists.newArrayList(games.findAll());
+		assertTrue(gameslist.contains(g));
 	}
-
-
-
-	private String getUUID() {
-		String uuid = "";
-		do {
-
-			uuid = UUID.randomUUID().toString();
-
-		} while (!SetOfUUID.add(uuid));
-		return uuid;
-	}
-
 
 }

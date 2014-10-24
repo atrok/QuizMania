@@ -1,6 +1,10 @@
 package com.quizmania.client;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +45,7 @@ public interface GameSvcApi {
 
 	
 	@GET(GAME_SVC_PATH)
-	public Collection<Game> getListOfGames();
+	public List<Game> getListOfGames(HttpServletResponse resp) throws IOException;
 	
 	@POST(value=GAME_SVC_PATH)
 	public boolean addGameRecord( @Body Game g);

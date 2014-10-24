@@ -11,6 +11,7 @@ public class GameRepositoryInit {
 	
 	@Autowired
 	private static GameRepository games;
+	
 	private final static Logger logger=Logger.getLogger(GameRepositoryInit.class);
 	
 	//private final static  GameRepositoryInit init=new GameRepositoryInit();
@@ -20,10 +21,9 @@ public class GameRepositoryInit {
 	
 	public static void create(){
 		try{
-		if (games.count()==0)
+		
 			games.save(ConfigurationUtil.readWithCsvReader());
-		else 
-			logger.info("Games repository is already initialized");
+			logger.info("Games repository is populated");
 		}catch(Exception e){
 			logger.error("Failed to create repository with data");
 			e.printStackTrace();

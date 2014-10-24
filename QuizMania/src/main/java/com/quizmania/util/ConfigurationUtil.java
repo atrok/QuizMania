@@ -2,7 +2,10 @@ package com.quizmania.util;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.supercsv.cellprocessor.Optional;
@@ -21,6 +24,7 @@ public class ConfigurationUtil {
 	
 	private final static String QUIZ_FILE = "quizes.csv";
 	private final static Logger logger=Logger.getLogger(ConfigurationUtil.class);
+	private static Set<String> SetOfUUID = new HashSet<String>();
 	
 	private static CellProcessor[] getProcessors() {
 
@@ -58,6 +62,7 @@ public class ConfigurationUtil {
 						"lineNo=%s, rowNo=%s, customerMap=%s",
 						mapReader.getLineNumber(), mapReader.getRowNumber(),
 						game));
+				game.setId(getUUID());
 				games.add(game);
 			}
 		}
@@ -72,4 +77,19 @@ public class ConfigurationUtil {
 		}
 		return games;
 	}
+	
+	/*
+	 * method to generate random ID for Entity classes
+	 */
+	public static String getUUID() {
+		String uuid = "";
+		do {
+
+			uuid = UUID.randomUUID().toString();
+
+		} while (!SetOfUUID.add(uuid));
+		return uuid;
+	}
+
+
 }

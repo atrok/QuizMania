@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface GameRepository extends CrudRepository<Game, Long>{
 
 	// Find all videos with a matching title (e.g., Video.name)
-	public Collection<Game> findByName(String title);
+	public Collection<Game> findById(String id);
 	
 }

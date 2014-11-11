@@ -21,7 +21,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 @EnableDynamoDBRepositories(basePackages = "com.quizmania.repository")
 public class DynamoDBConfiguration {
 
-    @Value("${amazon.dynamodb.endpoint}") //dynamodb.us-west-1.amazonaws.com
+    @Value("${amazon.dynamodb.endpoint}") 
     private String amazonDynamoDBEndpoint;
 
     @Value("${amazon.aws.accesskey}")
@@ -33,14 +33,6 @@ public class DynamoDBConfiguration {
     @Bean
     public AmazonDynamoDB amazonDynamoDB() {
     	
-    	ClassLoader cl = ClassLoader.getSystemClassLoader();
-    	 
-        URL[] urls = ((URLClassLoader)cl).getURLs();
- 
-        for(URL url: urls){
-        	System.out.println(url.getFile());
-        }
-        
         AmazonDynamoDB amazonDynamoDB = new AmazonDynamoDBClient(
                 amazonAWSCredentials());
         if (StringUtils.isNotEmpty(amazonDynamoDBEndpoint)) {

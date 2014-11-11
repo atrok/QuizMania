@@ -12,10 +12,13 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<User, Long>{
 
 	// Find all videos with a matching title (e.g., Video.name)
-	public Collection<User> findByUserId(String userId);
+	public Collection<User> findById(String userId);
 	public Collection<User> findByUserName(String userName);
 	public Collection<User> findByFirstName(String firstName);
 	public Collection<User> findByLastName(String string);
+	public Collection<User> findAll();
+	public User findByEmail(String username);
+	
 	
 }
 

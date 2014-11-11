@@ -11,12 +11,12 @@ public class User{
 
 
 	private String id;
-	private String userName;
-	private String firstName;
-	private String email;
-	private String lastName;
-	private String password;
-	private Role role;
+	private String userName="";
+	private String firstName="";
+	private String email="";
+	private String lastName="";
+	private String password="none";
+	private String role=Role.ROLE_USER;
 	
 	public String getPassword() {
 		return password;
@@ -24,11 +24,12 @@ public class User{
 
 
 
-	public User(String firstname, String lastname) {
-		this.firstName = firstname;
-		this.lastName = lastname;
+	public User(String email,String password) {
+		this.password=password;
+		this.email=email;
+		
 	}
-
+	
 	public User(){}
 	
 	@DynamoDBHashKey
@@ -68,15 +69,20 @@ public class User{
 		if (u instanceof User) {
 			User uu = (User) u;
 
-			if ((id.equals(uu.id)) && (firstName.equals(uu.firstName))
-					&& (lastName.equals(uu.lastName))
-					&& (userName.equals(uu.userName)))
+			if ((id.equals(uu.id)) && 
+					((
+							(firstName.equals(uu.firstName))
+							&& (lastName.equals(uu.lastName))
+							&& (userName.equals(uu.userName))
+					) || email.equals(uu.email))
+					)
 				return true;
 		}
 
 		return false;
 	}
-
+	
+	@DynamoDBAttribute
 	public String getUsername() {
 		return userName;
 	}
@@ -85,7 +91,7 @@ public class User{
 		this.userName = username;
 	}
 
-
+	@DynamoDBAttribute
 	public String getEmail() {
 		return email;
 	}
@@ -95,14 +101,13 @@ public class User{
 	}
 
 
-
-	public Role getRole() {
+	@DynamoDBAttribute
+	public String getRole() {
 		return role;
 	}
 
 
-
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

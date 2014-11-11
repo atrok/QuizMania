@@ -29,17 +29,18 @@ public class TestDynamoUser {
 
 	@Test
 	public void sampleTestCase() {
-		User dave = new User("Andrey", "Trok");
+		User dave = new User("and.tr@aaa.com","none");
 		repository.save(dave);
 
-		User carter = new User("Carter", "Matthews");
+		User carter = new User("quiz@joke.com","none");
+		
 		repository.save(carter);
 
-		Collection<User> result = repository.findByLastName("Matthews");
+		User result = repository.findByEmail("quiz@joke.com");
 
-		assertEquals(result.size(), 1);
-		assertTrue("User Dave should be found", 
-				result.contains(carter));
+		//assertEquals(result.size(), 1);
+		assertTrue("User is not found", 
+				result.equals(carter));
 	}
 
 	@Before

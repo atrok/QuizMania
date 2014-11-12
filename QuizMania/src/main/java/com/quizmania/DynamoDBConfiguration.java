@@ -1,8 +1,5 @@
 package com.quizmania;
 
-import java.net.URL;
-import java.net.URLClassLoader;
-
 import org.apache.commons.lang3.StringUtils;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Value;

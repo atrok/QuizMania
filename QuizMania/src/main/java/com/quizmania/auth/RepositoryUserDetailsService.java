@@ -1,5 +1,6 @@
 package com.quizmania.auth;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,7 @@ import com.quizmania.repository.UserRepository;
  
 public class RepositoryUserDetailsService implements UserDetailsService {
  
+	private Logger log=Logger.getLogger(RepositoryUserDetailsService.class);
     private UserRepository repository;
  
     //@Autowired
@@ -20,6 +22,8 @@ public class RepositoryUserDetailsService implements UserDetailsService {
 
 	@Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		log.info("Entered into RepositoryUserDetailsService.loadUserByUsername, looking for:"+username );
         User user = repository.findByEmail(username);
  
         if (user == null) {

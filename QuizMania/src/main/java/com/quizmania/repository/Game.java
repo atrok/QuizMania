@@ -102,8 +102,9 @@ public class Game {
 		this.rate = rate;
 	}
 
-	public boolean equalTo(Game g){
-		return  (id==g.id);
+	public boolean equalTo(Object g){
+		Game r=(Game)g;
+		return  (id==r.id);
 		
 	}
 	public String toString(){
@@ -119,43 +120,18 @@ public class Game {
 	}
 	
 	
-	public static Builder getBuilder(String var1, String var2,String var3, String var4,
+	public Game (String var1, String var2,String var3, String var4,
     		int answer, String description, int rates) {
 		
-        return new Builder(var1, var2,var3, var4,
-        		answer, description, rates);
+		this.var1 = var1;
+		this.var2 = var2;
+		this.var3 = var3;
+		this.var4 = var4;
+		this.answer = answer;
+		this.description = description;
+		this.rate=rates;
     }
-    /**
-     * A Builder class used to create new Person objects.
-     */
-    public static class Builder {
-        Game built;
- 
-        /**
-         * Creates a new Builder instance.
-         * @param firstName The first name of the created Person object.
-         * @param lastName  The last name of the created Person object.
-         */
-        Builder(String var1, String var2,String var3, String var4,
-        		int answer, String description, int rates) {
-            built = new Game();
-            built.var1 = var1;
-            built.var2 = var2;
-            built.var3 = var3;
-            built.var4 = var4;
-            built.answer = answer;
-            built.description = description;
-            built.rate=rates;
-        }
- 
-        /**
-         * Builds the new Person object.
-         * @return  The created Person object.
-         */
-        public Game build() {
-            return built;
-        }
-    }
+
 		
 		
 	

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import retrofit.http.GET;
+
 import com.google.common.collect.Lists;
 import com.quizmania.client.GameSvcApi;
 import com.quizmania.repository.Game;
@@ -102,5 +104,7 @@ public class GameController implements GameSvcApi{
 	public void addRepository(GameRepository games){
 		this.games=games;
 	}
+
+
 		
 }

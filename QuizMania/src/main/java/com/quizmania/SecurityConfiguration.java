@@ -22,9 +22,9 @@ import org.springframework.security.web.savedrequest.NullRequestCache;
 
 import com.quizmania.client.GameSvcApi;
 
-@Configuration
+//@Configuration
 // Setup Spring Security to intercept incoming requests to the Controllers
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	// This anonymous inner class' onAuthenticationSuccess() method is invoked
@@ -128,7 +128,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 * @param auth
 	 * @throws Exception
 	 */
-	@Autowired
+	//@Autowired
 	protected void registerAuthentication(
 			final AuthenticationManagerBuilder auth) throws Exception {
 		

@@ -30,14 +30,8 @@ public interface GameSvcApi {
 
 	// The path where we expect the VideoSvc to live
 	public static final String GAME_SVC_PATH = "/game";
-	//public static final String GAME_SVC_PATH_ADD = GAME_SVC_PATH +"/add";
 
-	// The path to search videos by title
-	//public static final String VIDEO_TITLE_SEARCH_PATH = VIDEO_SVC_PATH + "/search/findByName";
-	
-	// The path to search videos by title
-	//public static final String VIDEO_DURATION_SEARCH_PATH = VIDEO_SVC_PATH + "/search/findByDurationLessThan";
-	
+	public static final String TOKEN_PATH = "/oauth/token";
 	//
 	public static final String LOGIN_PAGE="/login";
 	//
@@ -45,7 +39,7 @@ public interface GameSvcApi {
 
 	
 	@GET(GAME_SVC_PATH)
-	public List<Game> getListOfGames(HttpServletResponse resp) throws IOException;
+	public List<Game> getListOfGames() throws IOException;
 	
 	@POST(value=GAME_SVC_PATH)
 	public boolean addGameRecord( @Body Game g);

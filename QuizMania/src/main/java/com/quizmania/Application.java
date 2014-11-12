@@ -16,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.quizmania.repository.RepositoryFactory;
@@ -40,8 +41,8 @@ import com.quizmania.server.GameRepositoryInit;
 // Any class in this package that is annotated with @Controller is going to be
 // automatically discovered and connected to the DispatcherServlet.
 @ComponentScan
-@Import({SecurityConfiguration.class,DynamoDBConfiguration.class})
-public class Application {
+@Import({OAuth2SecurityConfiguration.class,DynamoDBConfiguration.class})
+public class Application extends RepositoryRestMvcConfiguration {
 	
 	//final static Logger logger=Logger.getLogger(Application.class);
 

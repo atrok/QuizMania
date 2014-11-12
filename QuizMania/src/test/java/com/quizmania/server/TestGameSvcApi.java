@@ -1,16 +1,12 @@
 package com.quizmania.server;
 
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
-
 import org.apache.log4j.Logger;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -56,7 +52,7 @@ public class TestGameSvcApi {
 	public void test() {
 
 		
-		Game g = Game.getBuilder("test", "test2", "test3", "test4", 2, "test quiz: answer 2", 0).build();
+		Game g = new Game("test", "test2", "test3", "test4", 2, "test quiz: answer 2", 0);
 		g.setId(ConfigurationUtil.getUUID());
 		boolean ok = gamecontroller.addGameRecord(g);
 

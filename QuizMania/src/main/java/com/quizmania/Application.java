@@ -41,7 +41,7 @@ import com.quizmania.server.GameRepositoryInit;
 // Any class in this package that is annotated with @Controller is going to be
 // automatically discovered and connected to the DispatcherServlet.
 @ComponentScan
-@Import({OAuth2SecurityConfiguration.class,DynamoDBConfiguration.class})
+@Import({OAuth2SecurityConfiguration.class,DynamoDBConfiguration.class })
 public class Application extends RepositoryRestMvcConfiguration {
 	
 	//final static Logger logger=Logger.getLogger(Application.class);

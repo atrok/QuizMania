@@ -3,6 +3,7 @@ package com.quizmania;
 import java.io.File;
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,6 +75,8 @@ import com.quizmania.repository.UserRepository;
 public class OAuth2SecurityConfiguration {
 	
 	@Autowired
+	public static UserDetailsService userDetailsService;
+	@Autowired
     private UserRepository userRepository;
 
 
@@ -87,7 +90,7 @@ public class OAuth2SecurityConfiguration {
 		public PasswordEncoder passwordEncoder;
 		
 		@Autowired
-		private UserDetailsService userDetailsService;
+		public UserDetailsService userDetailsService;
 		
 		// This anonymous inner class' onAuthenticationSuccess() method is invoked
 		// whenever a client successfully logs in. The class just sends back an
@@ -166,7 +169,10 @@ public class OAuth2SecurityConfiguration {
 				.permitAll();
 			*/
 			
-			
+			// POST requests to /user is user creation requests, so it could be anonymous
+			http.authorizeRequests().antMatchers(HttpMethod.POST, "/user")
+			.anonymous();
+						
 			// Make sure that clients can logout too!!
 			http.logout()
 			    // Change the default logout path to /logout
@@ -194,7 +200,7 @@ public class OAuth2SecurityConfiguration {
 
 	/**
 	 *	This method is used to configure who is allowed to access which parts of our
-	 *	resource server (i.e. the "/video" endpoint) 
+	 *	resource server 
 	 */
 	@Configuration
 	@EnableResourceServer
@@ -214,10 +220,7 @@ public class OAuth2SecurityConfiguration {
 			
 			
 
-			// POST requests to /user is user creation requests, so it could be anonymous
-			http.authorizeRequests().antMatchers(HttpMethod.POST, "/user")
-			.anonymous();
-			
+
 			//other request like update/delete should have write access only
 			http
 			.authorizeRequests()
@@ -264,8 +267,12 @@ public class OAuth2SecurityConfiguration {
 		// A data structure used to store both a ClientDetailsService and a UserDetailsService
 		private ClientAndUserDetailsService combinedService_;
 		
-		@Autowired
-		private UserDetailsService userDetailsService;
+	//	@Autowired
+	//	private UserDetailsService userDetailsService;
+		
+	//	@Autowired
+	//    private UserRepository userRepository;
+		
 		/**
 		 * 
 		 * This constructor is used to setup the clients and users that will be able to login to the
@@ -367,68 +374,6 @@ public class OAuth2SecurityConfiguration {
 		return new RepositoryUserDetailsService(userRepository);
     }
 	
-	
-    // This version uses the Tomcat web container and configures it to
-	// support HTTPS. The code below performs the configuration of Tomcat
-	// for HTTPS. Each web container has a different API for configuring
-	// HTTPS. 
-	//
-	// The app now requires that you pass the location of the keystore and
-	// the password for your private key that you would like to setup HTTPS
-	// with. In Eclipse, you can set these options by going to:
-	//    1. Run->Run Configurations
-	//    2. Under Java Applications, select your run configuration for this app
-	//    3. Open the Arguments tab
-	//    4. In VM Arguments, provide the following information to use the
-	//       default keystore provided with the sample code:
-	//
-	//       -Dkeystore.file=src/main/resources/private/keystore -Dkeystore.pass=changeit
-	//
-	//    5. Note, this keystore is highly insecure! If you want more securtiy, you 
-	//       should obtain a real SSL certificate:
-	//
-	//       http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html
-	//
-
-/*
- * 
- */
-	@Bean
-    EmbeddedServletContainerCustomizer containerCustomizer(
-            @Value("${keystore.file:src/main/resources/private/keystore}") String keystoreFile,
-            @Value("${keystore.pass:changeit}") final String keystorePass) throws Exception {
-
-		// If you were going to reuse this class in another
-		// application, this is one of the key sections that you
-		// would want to change
-    	
-        final String absoluteKeystoreFile = new File(keystoreFile).getAbsolutePath();
-
-        return new EmbeddedServletContainerCustomizer () {
-
-			@Override
-			public void customize(ConfigurableEmbeddedServletContainer container) {
-		            TomcatEmbeddedServletContainerFactory tomcat = (TomcatEmbeddedServletContainerFactory) container;
-		            tomcat.addConnectorCustomizers(
-		                    new TomcatConnectorCustomizer() {
-								@Override
-								public void customize(Connector connector) {
-									connector.setPort(8443);
-			                        connector.setSecure(true);
-			                        connector.setScheme("https");
-
-			                        Http11NioProtocol proto = (Http11NioProtocol) connector.getProtocolHandler();
-			                        proto.setSSLEnabled(true);
-			                        proto.setKeystoreFile(absoluteKeystoreFile);
-			                        proto.setKeystorePass(keystorePass);
-			                        proto.setKeystoreType("JKS");
-			                        proto.setKeyAlias("tomcat");
-								}
-		                    });
-		    
-			}
-        };
-    }
 	
 
 }

@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
  
 public class UserDetailsImpl implements UserDetails {
@@ -84,11 +85,12 @@ public class UserDetailsImpl implements UserDetails {
             return this;
         }
  
-        public Builder role(Role role) {
-            this.role = role;
- 
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.toString());
+        public Builder role(Set<String> set) {
+            
+        	for (String r: set){
+            GrantedAuthority authority = new SimpleGrantedAuthority(r);
             this.authorities.add(authority);
+        	}
  
             return this;
         }

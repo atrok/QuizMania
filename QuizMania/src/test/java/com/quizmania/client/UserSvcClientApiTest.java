@@ -1,23 +1,21 @@
 package com.quizmania.client;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.*;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
-
+import retrofit.ErrorHandler;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.ApacheClient;
 
 import com.google.gson.JsonObject;
-
 import com.quizmania.client.GameSvcApi;
 import com.quizmania.client.SecuredRestBuilder;
 import com.quizmania.client.UserSvcApi;
@@ -49,16 +47,34 @@ import com.quizmania.server.integration.test.UnsafeHttpsClient;
  */
 public class UserSvcClientApiTest {
 
+	private Logger log=Logger.getLogger(UserSvcClientApiTest.class);
 	private final String USERNAME = "and.tr@aaa.com";
 	private final String PASSWORD = "none";
 	private final String CLIENT_ID = "mobile";
 	private final String READ_ONLY_CLIENT_ID = "mobileReader";
 
-	private final String TEST_URL = "https://localhost:8443";
+	private final String TEST_URL = "http://localhost:8888";//  we use fiddler port to intercept http request intended for our application running on 8443
+	private class ErrorRecorder implements ErrorHandler {
 
+		private RetrofitError error;
+
+		@Override
+		public Throwable handleError(RetrofitError cause) {
+			error = cause;
+			return error.getCause();
+		}
+
+		public RetrofitError getError() {
+			return error;
+		}
+	}
+	
+	private ErrorRecorder error=new ErrorRecorder();
+	
 	private UserSvcApi userService = new RestAdapter.Builder()
 			.setClient(new ApacheClient(UnsafeHttpsClient.createUnsafeClient()))
-			.setEndpoint(TEST_URL).setLogLevel(LogLevel.FULL).build()
+			.setEndpoint(TEST_URL).setLogLevel(LogLevel.FULL)
+			.setErrorHandler(error).build()
 			.create(UserSvcApi.class);
 
 	private UserSvcApi authUserService = new SecuredRestBuilder()
@@ -91,7 +107,12 @@ public class UserSvcClientApiTest {
 	@Test
 	public void testVideoAddAndList() throws Exception {
 		// Add the video
-		//userService.addUser(user);
+		try{
+		userService.addUser(user);
+		}catch(Exception e){
+			
+			e.printStackTrace();
+		}
 		List<User> users=authUserService.getUsersList();
 		// We should get back boolean true in case user is added
 		//assertTrue(ok);

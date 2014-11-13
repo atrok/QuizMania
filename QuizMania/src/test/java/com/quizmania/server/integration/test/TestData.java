@@ -30,7 +30,7 @@ public class TestData {
 		String password = UUID.randomUUID().toString();
 		String email=UUID.randomUUID().toString()+"@"+UUID.randomUUID().toString()+".com";
 		
-		return randomUser(email,password);
+		return new User(email,password);
 	}
 
 	public static Game randomGame() {
@@ -59,6 +59,10 @@ public class TestData {
 
 	public static User randomUser(String uSERNAME, String pASSWORD) {
 		// TODO Auto-generated method stub
-		return new User(uSERNAME, pASSWORD);
+		User u=new User(uSERNAME, pASSWORD);
+		String[] i={"ROLE_ADMIN","ROLE_USER"};
+		u.setRole(i);
+		
+		return u;
 	}
 }

@@ -23,7 +23,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
 	@Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		log.info("Entered into RepositoryUserDetailsService.loadUserByUsername, looking for:"+username );
+		System.out.println("Entered into RepositoryUserDetailsService.loadUserByUsername, looking for:"+username );
         User user = repository.findByEmail(username);
  
         if (user == null) {
@@ -35,6 +35,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
                 .lastName(user.getLastName())
                 .password(user.getPassword())
                 .username(user.getEmail())
+                .role(user.getRole())
                 .build();
  
         return principal;

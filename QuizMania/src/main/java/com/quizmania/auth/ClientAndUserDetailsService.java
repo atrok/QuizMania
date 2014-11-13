@@ -56,6 +56,8 @@ public class ClientAndUserDetailsService implements UserDetailsService,
 			user = users_.loadUserByUsername(username);
 		}catch(UsernameNotFoundException e){
 			user = clientDetailsWrapper_.loadUserByUsername(username);
+			e.printStackTrace();
+			throw e;
 		}
 		return user;
 	}

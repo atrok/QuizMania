@@ -24,6 +24,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.UserDetailsServiceConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -74,10 +75,7 @@ import com.quizmania.repository.UserRepository;
 @Configuration
 public class OAuth2SecurityConfiguration {
 	
-	@Autowired
-	public static UserDetailsService userDetailsService;
-	@Autowired
-    private UserRepository userRepository;
+
 
 
 	// This first section of the configuration just makes sure that Spring Security picks
@@ -167,8 +165,8 @@ public class OAuth2SecurityConfiguration {
 				.successHandler(NO_REDIRECT_SUCCESS_HANDLER)
 				// Allow everyone to access the login URL
 				.permitAll();
-			*/
 			
+			*/
 			// POST requests to /user is user creation requests, so it could be anonymous
 			http.authorizeRequests().antMatchers(HttpMethod.POST, "/user")
 			.anonymous();
@@ -220,7 +218,6 @@ public class OAuth2SecurityConfiguration {
 			
 			
 
-
 			//other request like update/delete should have write access only
 			http
 			.authorizeRequests()
@@ -256,7 +253,7 @@ public class OAuth2SecurityConfiguration {
 	
 	@Configuration
 	@EnableAuthorizationServer
-	@Order(Ordered.LOWEST_PRECEDENCE - 200)
+	//@Order(Ordered.LOWEST_PRECEDENCE - 200)
 	protected static class OAuth2Config extends
 			AuthorizationServerConfigurerAdapter {
 
@@ -267,11 +264,13 @@ public class OAuth2SecurityConfiguration {
 		// A data structure used to store both a ClientDetailsService and a UserDetailsService
 		private ClientAndUserDetailsService combinedService_;
 		
-	//	@Autowired
-	//	private UserDetailsService userDetailsService;
+		@Autowired
+		private UserRepository userRepository;
 		
-	//	@Autowired
-	//    private UserRepository userRepository;
+		@Autowired
+		private UserDetailsService userDetailsService;
+		
+
 		
 		/**
 		 * 
@@ -335,7 +334,7 @@ public class OAuth2SecurityConfiguration {
 		 */
 		@Bean
 		public UserDetailsService userDetailsService() {
-			return combinedService_;
+			return new RepositoryUserDetailsService();
 		}
 
 
@@ -360,6 +359,7 @@ public class OAuth2SecurityConfiguration {
 				throws Exception {
 			clients.withClientDetails(clientDetailsService());
 		}
+		
 
 	}
 	
@@ -371,7 +371,7 @@ public class OAuth2SecurityConfiguration {
 	
 	@Bean
     public UserDetailsService userDetailsService() {
-		return new RepositoryUserDetailsService(userRepository);
+		return new RepositoryUserDetailsService();
     }
 	
 	

@@ -6,6 +6,7 @@
  */
 package com.quizmania.auth;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +28,7 @@ import com.quizmania.repository.UserRepository;
 public class ClientAndUserDetailsService implements UserDetailsService,
 		ClientDetailsService {
 
-    
+    private final static Logger log=Logger.getLogger(ClientAndUserDetailsService.class);
 	private final ClientDetailsService clients_;
 
 	private final UserDetailsService users_;
@@ -45,6 +46,8 @@ public class ClientAndUserDetailsService implements UserDetailsService,
 	@Override
 	public ClientDetails loadClientByClientId(String clientId)
 			throws ClientRegistrationException {
+		log.info("loadClientByClientId:"+clientId);
+		
 		return clients_.loadClientByClientId(clientId);
 	}
 	
@@ -52,6 +55,7 @@ public class ClientAndUserDetailsService implements UserDetailsService,
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		UserDetails user = null;
+		log.info("loadUserByUsername:"+username);
 		try{
 			user = users_.loadUserByUsername(username);
 		}catch(UsernameNotFoundException e){

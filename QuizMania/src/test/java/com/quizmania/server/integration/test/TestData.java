@@ -1,8 +1,11 @@
 package com.quizmania.server.integration.test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
-
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quizmania.repository.Game;
@@ -60,7 +63,8 @@ public class TestData {
 	public static User randomUser(String uSERNAME, String pASSWORD) {
 		// TODO Auto-generated method stub
 		User u=new User(uSERNAME, pASSWORD);
-		String[] i={"ROLE_ADMIN","ROLE_USER"};
+		Set<String> i=new HashSet<String>();
+		Collections.addAll(i,"ROLE_ADMIN","ROLE_USER");
 		u.setRole(i);
 		
 		return u;

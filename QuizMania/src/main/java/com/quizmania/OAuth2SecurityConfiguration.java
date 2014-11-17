@@ -2,6 +2,8 @@ package com.quizmania;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
 import org.apache.http.HttpStatus;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
@@ -29,6 +33,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,13 +45,18 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.savedrequest.NullRequestCache;
 
 import com.quizmania.auth.ClientAndUserDetailsService;
 import com.quizmania.auth.RepositoryUserDetailsService;
+import com.quizmania.auth.Role;
+import com.quizmania.auth.UserDetailsImpl;
 import com.quizmania.client.GameSvcApi;
+import com.quizmania.repository.User;
+import com.quizmania.repository.UserBuilder;
 import com.quizmania.repository.UserRepository;
 
 /**
@@ -183,7 +193,7 @@ public class OAuth2SecurityConfiguration {
 			
 			// Require clients to login and have an account with the "user" role
 			// in order to access /video
-			// http.authorizeRequests().antMatchers("/video").hasRole("user");
+			 http.authorizeRequests().antMatchers("/oath/authorize").hasRole("user");
 			
 			// Require clients to login and have an account with the "user" role
 			// in order to send a POST request to /video
@@ -193,6 +203,12 @@ public class OAuth2SecurityConfiguration {
 			// other than the login and lougout that we have configured above.
 			//http.authorizeRequests().anyRequest().authenticated();
 		}
+		
+		@Override
+	    @Bean
+	    public AuthenticationManager authenticationManagerBean() throws Exception {
+	        return super.authenticationManagerBean();
+	    }
 	}
 
 
@@ -253,17 +269,22 @@ public class OAuth2SecurityConfiguration {
 	
 	@Configuration
 	@EnableAuthorizationServer
-	//@Order(Ordered.LOWEST_PRECEDENCE - 200)
+	@Order(Ordered.LOWEST_PRECEDENCE - 100)
 	protected static class OAuth2Config extends
 			AuthorizationServerConfigurerAdapter {
 
+		private static Logger log=Logger.getLogger(OAuth2Config.class);
+		
 		// Delegate the processing of Authentication requests to the framework
 		@Autowired
+		@Qualifier("authenticationManagerBean")
 		private AuthenticationManager authenticationManager;
+		
 
 		// A data structure used to store both a ClientDetailsService and a UserDetailsService
 		private ClientAndUserDetailsService combinedService_;
 		
+		//private ClientDetailsService client;
 		@Autowired
 		private UserRepository userRepository;
 		
@@ -285,13 +306,14 @@ public class OAuth2SecurityConfiguration {
 		 * @throws Exception
 		 */
 		
+		
 		public OAuth2Config() throws Exception {
 			
 			// If you were going to reuse this class in another
 			// application, this is one of the key sections that you
 			// would want to change
 			
-			
+			log.info("Initializing main constructor");
 			// Create a service that has the credentials for all our clients
 			ClientDetailsService csvc = new InMemoryClientDetailsServiceBuilder()
 					// Create a client that has "read" and "write" access to the
@@ -308,15 +330,31 @@ public class OAuth2SecurityConfiguration {
 					.accessTokenValiditySeconds(3600).and().build();
 
 			// Create a series of hard-coded users. 
-			UserDetailsService svc = userDetailsService;
-
+			UserDetailsImpl.Builder user = UserDetailsImpl.getBuilder();
+			
+			
+			UserDetailsService svc = new InMemoryUserDetailsManager(
+					Arrays.asList(
+							user
+								.username("admin")
+								.password("none")
+								.role(Role.ROLE_ADMIN,Role.ROLE_USER)
+								.build(),
+							user
+								.username("user0")
+								.password("pass")
+								.role(Role.ROLE_USER)
+								.build()));
+			
 			// Since clients have to use BASIC authentication with the client's id/secret,
 			// when sending a request for a password grant, we make each client a user
 			// as well. When the BASIC authentication information is pulled from the
 			// request, this combined UserDetailsService will authenticate that the
 			// client is a valid "user". 
+			
 			combinedService_ = new ClientAndUserDetailsService(csvc, svc);
 		}
+	
 	
 
 		/**
@@ -325,6 +363,7 @@ public class OAuth2SecurityConfiguration {
 
 		@Bean
 		public ClientDetailsService clientDetailsService() throws Exception {
+			log.info("Initializing ClientDetailsService");
 			return combinedService_;
 		}
 
@@ -334,6 +373,7 @@ public class OAuth2SecurityConfiguration {
 		 */
 		@Bean
 		public UserDetailsService userDetailsService() {
+			log.info("Initializing UserDetailsService");
 			return new RepositoryUserDetailsService();
 		}
 
@@ -343,9 +383,10 @@ public class OAuth2SecurityConfiguration {
 		 * to process authentication requests.
 		 */
 		@Override
-
 		public void configure(AuthorizationServerEndpointsConfigurer endpoints)
 				throws Exception {
+			log.info("Initializing configure(AuthorizationServerEndpointsConfigurer endpoints)");
+			
 			endpoints.authenticationManager(authenticationManager);
 		}
 
@@ -357,6 +398,10 @@ public class OAuth2SecurityConfiguration {
 		@Override
 		public void configure(ClientDetailsServiceConfigurer clients)
 				throws Exception {
+			
+			log.info("Initializing configure(ClientDetailsServiceConfigurer clients)");
+			
+
 			clients.withClientDetails(clientDetailsService());
 		}
 		
@@ -373,6 +418,7 @@ public class OAuth2SecurityConfiguration {
     public UserDetailsService userDetailsService() {
 		return new RepositoryUserDetailsService();
     }
+	
 	
 	
 

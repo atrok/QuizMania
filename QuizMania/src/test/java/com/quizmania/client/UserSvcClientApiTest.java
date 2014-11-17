@@ -48,7 +48,7 @@ import com.quizmania.server.integration.test.UnsafeHttpsClient;
 public class UserSvcClientApiTest {
 
 	private Logger log=Logger.getLogger(UserSvcClientApiTest.class);
-	private final String USERNAME = "and.tr@aaa.com";
+	private final String USERNAME = "admin";
 	private final String PASSWORD = "none";
 	private final String CLIENT_ID = "mobile";
 	private final String READ_ONLY_CLIENT_ID = "mobileReader";

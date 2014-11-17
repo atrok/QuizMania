@@ -7,7 +7,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
  
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.quizmania.repository.UserBuilder.Builder;
+
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,12 +29,18 @@ public class UserDetailsImpl implements UserDetails {
     private String lastName;
     private Role role;
     private Set<SimpleGrantedAuthority> authorities_;
+	private boolean isAccountNonExpired=false;
+	private boolean isEnabled=false;
+	private boolean isCredentialsNonExpired=false;
+	private boolean isAccountNonLocked=false;
     
     //private SocialMediaService socialSignInProvider;
  
     public UserDetailsImpl(String username, String password, Collection<GrantedAuthority> authorities) {
         this.username=username;
         this.password=password;
+        authorities_=new HashSet<SimpleGrantedAuthority>();
+        
         Set<String> t=AuthorityUtils.authorityListToSet(authorities);
         for (String tt: t){
         	authorities_.add(new SimpleGrantedAuthority(tt));
@@ -53,7 +62,10 @@ public class UserDetailsImpl implements UserDetails {
         private String password;
  
         private Role role;
- 
+    	private boolean isAccountNonExpired=true;
+    	private boolean isEnabled=true;
+    	private boolean isCredentialsNonExpired=true;
+    	private boolean isAccountNonLocked=true;
  
         private Set<GrantedAuthority> authorities;
  
@@ -85,9 +97,9 @@ public class UserDetailsImpl implements UserDetails {
             return this;
         }
  
-        public Builder role(Set<String> set) {
-            
-        	for (String r: set){
+        public Builder role(String... role) {
+        	            
+        	for (String r: role){
             GrantedAuthority authority = new SimpleGrantedAuthority(r);
             this.authorities.add(authority);
         	}
@@ -100,14 +112,35 @@ public class UserDetailsImpl implements UserDetails {
             this.username = username;
             return this;
         }
+        
+        public Builder isAccountNonExpired(boolean cond) {
+            this.isAccountNonExpired = cond;
+            return this;
+        }
+        public Builder isAccountNonLocked(boolean cond) {
+            this.isAccountNonLocked = cond;
+            return this;
+        }
+        public Builder isCredentialsNonExpired(boolean cond) {
+            this.isCredentialsNonExpired= cond;
+            return this;
+        }
+        public Builder isEnabled(boolean cond) {
+            this.isEnabled = cond;
+            return this;
+        }
  
-        public UserDetailsImpl build() {
+        public UserDetails build() {
             UserDetailsImpl user = new UserDetailsImpl(username, password, authorities);
  
             user.id = id;
             user.firstName = firstName;
             user.lastName = lastName;
             user.role = role;
+            user.isAccountNonExpired=isAccountNonExpired;
+            user.isAccountNonLocked=isAccountNonLocked;
+            user.isCredentialsNonExpired=isCredentialsNonExpired;
+            user.isEnabled=isEnabled;
  
             return user;
         }
@@ -134,25 +167,27 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return isAccountNonExpired;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return isAccountNonLocked;
 	}
+
+
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return isCredentialsNonExpired;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return isEnabled;
 	}
 	
 	public static Builder getBuilder(){

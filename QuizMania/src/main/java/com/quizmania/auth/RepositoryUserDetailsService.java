@@ -41,7 +41,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
                 .lastName(user.getLastName())
                 .password(user.getPassword())
                 .username(user.getEmail())
-                .role(user.getRole())
+                .role(user.getRole().toArray(new String[0])) /// we convert it to String[0] because we use getRole on User object that's Dynamo Entity; Dynamo supports Set objects only, it doesn't support Arrays
                 .build();
  
         return principal;

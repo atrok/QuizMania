@@ -49,6 +49,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.savedrequest.NullRequestCache;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import com.quizmania.auth.ClientAndUserDetailsService;
 import com.quizmania.auth.RepositoryUserDetailsService;
@@ -208,6 +209,23 @@ public class OAuth2SecurityConfiguration {
 	    @Bean
 	    public AuthenticationManager authenticationManagerBean() throws Exception {
 	        return super.authenticationManagerBean();
+	    }
+		
+		@Bean(name="simpleMappingExceptionResolver")
+	    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
+	        SimpleMappingExceptionResolver r =
+	              new SimpleMappingExceptionResolver();
+
+	        Properties mappings = new Properties();
+	        mappings.setProperty("DatabaseException", "databaseError");
+	        mappings.setProperty("InvalidCreditCardException", "creditCardError");
+	        mappings.setProperty("UserException", "userError");
+
+	        r.setExceptionMappings(mappings);  // None by default
+	        r.setDefaultErrorView("error");    // No default
+	        r.setExceptionAttribute("ex");     // Default is "exception"
+	        r.setWarnLogCategory("example.MvcLogger");     // No default
+	        return r;
 	    }
 	}
 

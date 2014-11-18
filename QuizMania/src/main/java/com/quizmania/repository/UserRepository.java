@@ -13,15 +13,11 @@ import com.quizmania.client.UserSvcApi;
 @EnableScan
 public interface UserRepository extends CrudRepository<User, String>{
 
-	// Find all videos with a matching title (e.g., Video.name)
-	public Collection<User> findById(
-			@Param(UserSvcApi.USERID) String userId);
-	
-	public Collection<User> findByUserName(
+	public User findByUserName(
 			@Param(UserSvcApi.USERNAME) String userName);
-	public Collection<User> findByFirstName(
+	public User findByFirstName(
 			@Param(UserSvcApi.FIRSTNAME)String firstName);
-	public Collection<User> findByLastName(
+	public User findByLastName(
 			@Param(UserSvcApi.LASTNAME)String string);
 	public Collection<User> findAll();
 	public User findByEmail(

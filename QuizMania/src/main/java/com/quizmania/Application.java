@@ -20,6 +20,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.quizmania.repository.RepositoryFactory;
+import com.quizmania.repository.UserEventHandler;
 import com.quizmania.server.GameRepositoryInit;
 
 
@@ -74,5 +75,9 @@ public class Application extends RepositoryRestMvcConfiguration {
     public RepositoryFactory getRepositoryFactory(){
     	return new RepositoryFactory();
     }
+    
+    @Bean UserEventHandler usernEventHandler() {
+        return new UserEventHandler();
+      }
 }
 

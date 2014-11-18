@@ -30,7 +30,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		System.out.println("Entered into RepositoryUserDetailsService.loadUserByUsername, looking for:"+username );
-        User user = repository.findByEmail(username);
+        User user = repository.findByUserName(username);
  
         if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + username);

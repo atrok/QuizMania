@@ -105,6 +105,12 @@ public class GameController implements GameSvcApi{
 		this.games=games;
 	}
 
+	@Override
+	public List<Game> getListOfGames() throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 		
 }

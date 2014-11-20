@@ -1,26 +1,15 @@
 package com.quizmania;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Properties;
-
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.connector.Connector;
-import org.apache.coyote.http11.Http11NioProtocol;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.tomcat.TomcatConnectorCustomizer;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -28,12 +17,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.UserDetailsServiceConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,15 +36,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.savedrequest.NullRequestCache;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
-
 import com.quizmania.auth.ClientAndUserDetailsService;
 import com.quizmania.auth.RepositoryUserDetailsService;
 import com.quizmania.auth.Role;
 import com.quizmania.auth.UserDetailsImpl;
-import com.quizmania.client.GameSvcApi;
-import com.quizmania.repository.User;
-import com.quizmania.repository.UserBuilder;
+import com.quizmania.exceptions.SimpleExceptionResolver;
 import com.quizmania.repository.UserRepository;
 
 /**
@@ -211,21 +194,9 @@ public class OAuth2SecurityConfiguration {
 	        return super.authenticationManagerBean();
 	    }
 		
-		@Bean(name="simpleMappingExceptionResolver")
-	    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
-	        SimpleMappingExceptionResolver r =
-	              new SimpleMappingExceptionResolver();
-
-	        Properties mappings = new Properties();
-	        mappings.setProperty("DatabaseException", "databaseError");
-	        mappings.setProperty("InvalidCreditCardException", "creditCardError");
-	        mappings.setProperty("UserException", "userError");
-
-	        r.setExceptionMappings(mappings);  // None by default
-	        r.setDefaultErrorView("error");    // No default
-	        r.setExceptionAttribute("ex");     // Default is "exception"
-	        r.setWarnLogCategory("example.MvcLogger");     // No default
-	        return r;
+		@Bean(name="SimpleExceptionResolver")
+	    public SimpleExceptionResolver createExceptionResolver() {
+	        return new SimpleExceptionResolver();
 	    }
 	}
 

@@ -11,9 +11,9 @@ import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
 
+import com.quizmania.exceptions.UserException;
 import com.quizmania.repository.Game;
 import com.quizmania.repository.User;
-import com.quizmania.repository.UserException;
 
 public interface UserSvcApi {
 	public static final String USERNAME="username";

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import com.google.common.collect.Lists;
 import com.quizmania.repository.Game;
 import com.quizmania.repository.GameRepository;
 import com.quizmania.util.ConfigurationUtil;
+import com.quizmania.util.GameRepositoryInit;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

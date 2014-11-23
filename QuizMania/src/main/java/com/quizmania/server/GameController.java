@@ -24,6 +24,7 @@ import com.quizmania.repository.GameRepository;
 import com.quizmania.repository.RepositoryFactory;
 import com.quizmania.repository.ScoreBoard;
 import com.quizmania.repository.ScoreBoardRepository;
+import com.quizmania.util.GameRepositoryInit;
 
 @Controller
 public class GameController implements GameSvcApi{

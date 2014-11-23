@@ -1,0 +1,4 @@
+include ':app'
+
+include ':QuizMania'
+project(':QuizMania').projectDir = new File(settingsDir, '../QuizMania')

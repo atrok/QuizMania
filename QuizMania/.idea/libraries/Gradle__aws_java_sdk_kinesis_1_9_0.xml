@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: aws-java-sdk-kinesis-1.9.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-kinesis/1.9.0/35216c01edcb0ab7a420d9fbe8d8ec0dc5871240/aws-java-sdk-kinesis-1.9.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-kinesis/1.9.0/b27e1687dcbc4dc4583bfc0680a9d400a43e2a9a/aws-java-sdk-kinesis-1.9.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -21,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.quizmania.exceptions.UserEventHandler;
 import com.quizmania.repository.RepositoryFactory;
-import com.quizmania.server.GameRepositoryInit;
+import com.quizmania.util.GameRepositoryInit;
 
 
 
@@ -79,5 +79,6 @@ public class Application extends RepositoryRestMvcConfiguration {
     @Bean UserEventHandler usernEventHandler() {
         return new UserEventHandler();
       }
+    
 }
 

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: spring-data-dynamodb-1.0.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.socialsignin/spring-data-dynamodb/1.0.1-SNAPSHOT/b1c66c0990eaed310df0785074b64c2ce1e7fd1/spring-data-dynamodb-1.0.1-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.socialsignin/spring-data-dynamodb/1.0.1-SNAPSHOT/4b087c58f3a3a7e73540badb48557aebcd0fe7e3/spring-data-dynamodb-1.0.1-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

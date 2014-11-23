@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: aws-java-sdk-elasticbeanstalk-1.9.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-elasticbeanstalk/1.9.0/fc2e4c13c199e0a3b88c1451551f96b9bf01db1/aws-java-sdk-elasticbeanstalk-1.9.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-elasticbeanstalk/1.9.0/8bf62e92dd50f6be08db66378e7e0932f6309e27/aws-java-sdk-elasticbeanstalk-1.9.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

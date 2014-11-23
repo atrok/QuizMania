@@ -7,9 +7,7 @@ import org.springframework.data.rest.core.annotation.HandleAfterSave;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.quizmania.repository.User;
 import com.quizmania.repository.UserRepository;
 
 @RepositoryEventHandler

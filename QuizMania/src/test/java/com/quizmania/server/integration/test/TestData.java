@@ -1,6 +1,5 @@
 package com.quizmania.server.integration.test;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
@@ -8,8 +7,8 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quizmania.repository.Game;
-import com.quizmania.repository.User;
+import com.quizmania.client.Game;
+import com.quizmania.client.User;
 
 /**
  * This is a utility class to aid in the construction of

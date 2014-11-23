@@ -2,6 +2,7 @@ package com.quizmania;
 
 import java.io.IOException;
 import java.util.Arrays;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,11 +37,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.savedrequest.NullRequestCache;
+
 import com.quizmania.auth.ClientAndUserDetailsService;
 import com.quizmania.auth.RepositoryUserDetailsService;
 import com.quizmania.auth.Role;
 import com.quizmania.auth.UserDetailsImpl;
-import com.quizmania.exceptions.SimpleExceptionResolver;
 import com.quizmania.repository.UserRepository;
 
 /**

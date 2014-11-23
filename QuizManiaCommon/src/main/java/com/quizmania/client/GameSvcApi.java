@@ -17,8 +17,7 @@ import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
-import com.quizmania.repository.Game;
-import com.quizmania.repository.ScoreBoard;
+
 
 public interface GameSvcApi {
 	

@@ -1,4 +1,4 @@
-package com.quizmania.repository;
+package com.quizmania.client;
 
 
 

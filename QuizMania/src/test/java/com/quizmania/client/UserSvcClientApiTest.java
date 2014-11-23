@@ -1,8 +1,8 @@
 package com.quizmania.client;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,11 +15,6 @@ import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.ApacheClient;
 
-import com.google.gson.JsonObject;
-import com.quizmania.client.GameSvcApi;
-import com.quizmania.client.SecuredRestBuilder;
-import com.quizmania.client.UserSvcApi;
-import com.quizmania.repository.User;
 import com.quizmania.server.integration.test.TestData;
 import com.quizmania.server.integration.test.UnsafeHttpsClient;
 

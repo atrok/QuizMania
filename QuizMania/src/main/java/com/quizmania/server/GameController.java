@@ -15,14 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import retrofit.http.GET;
-
 import com.google.common.collect.Lists;
-import com.quizmania.client.GameSvcApi;
-import com.quizmania.repository.Game;
 import com.quizmania.repository.GameRepository;
 import com.quizmania.repository.RepositoryFactory;
-import com.quizmania.repository.ScoreBoard;
 import com.quizmania.repository.ScoreBoardRepository;
 import com.quizmania.util.GameRepositoryInit;
 

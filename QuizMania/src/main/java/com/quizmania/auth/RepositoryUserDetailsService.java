@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.quizmania.repository.UserRepository;
+import com.quizmania.client.User;
  
 @Service
 public class RepositoryUserDetailsService implements UserDetailsService {

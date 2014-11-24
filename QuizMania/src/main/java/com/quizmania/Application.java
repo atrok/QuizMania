@@ -65,6 +65,7 @@ public class Application extends RepositoryRestMvcConfiguration {
     	return new RepositoryFactory();
     }
     
+    
     @Bean UserEventHandler usernEventHandler() {
         return new UserEventHandler();
       }

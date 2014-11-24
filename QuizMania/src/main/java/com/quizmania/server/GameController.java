@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Lists;
+import com.quizmania.client.Game;
+import com.quizmania.client.GameSvcApi;
+import com.quizmania.client.ScoreBoard;
 import com.quizmania.repository.GameRepository;
 import com.quizmania.repository.RepositoryFactory;
 import com.quizmania.repository.ScoreBoardRepository;
@@ -51,8 +54,9 @@ public class GameController implements GameSvcApi{
 	public @ResponseBody List<Game> populateGames(HttpServletResponse resp) throws IOException{
 		games=RepositoryFactory.getGameRepository();
 		
-		GameRepositoryInit.addRepository(games);
-		GameRepositoryInit.create();
+		GameRepositoryInit rep=new GameRepositoryInit();
+		rep.addRepository(games);
+		rep.create();
 		if (null!=games)
 			return Lists.newArrayList(
 					games.findAll()

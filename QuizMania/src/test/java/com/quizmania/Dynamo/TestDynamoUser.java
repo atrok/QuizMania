@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.quizmania.DynamoDBConfiguration;
+import com.quizmania.client.User;
 import com.quizmania.repository.UserRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)

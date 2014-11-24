@@ -8,9 +8,10 @@ import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 
+import com.quizmania.client.User;
 import com.quizmania.repository.UserRepository;
 
-@RepositoryEventHandler
+//@RepositoryEventHandler
 public class UserEventHandler {
 
 	Logger logger=Logger.getLogger(UserEventHandler.class);

@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.quizmania.client.User;
+
 /*
  * UserBuilder is required for sake of simplicity of User object creation:
  * 

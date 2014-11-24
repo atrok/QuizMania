@@ -5,6 +5,8 @@ import java.util.Collection;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.quizmania.client.Game;
+
 @Repository
 public interface GameRepository extends CrudRepository<Game, Long>{
 

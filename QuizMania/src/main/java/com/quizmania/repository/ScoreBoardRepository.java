@@ -5,6 +5,8 @@ import java.util.Collection;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.quizmania.client.ScoreBoard;
+
 @Repository
 public interface ScoreBoardRepository extends CrudRepository<ScoreBoard, Long>{
 

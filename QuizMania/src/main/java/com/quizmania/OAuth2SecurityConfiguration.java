@@ -195,10 +195,12 @@ public class OAuth2SecurityConfiguration {
 	        return super.authenticationManagerBean();
 	    }
 		
+		/*
 		@Bean(name="SimpleExceptionResolver")
 	    public SimpleExceptionResolver createExceptionResolver() {
 	        return new SimpleExceptionResolver();
 	    }
+	    */
 	}
 
 

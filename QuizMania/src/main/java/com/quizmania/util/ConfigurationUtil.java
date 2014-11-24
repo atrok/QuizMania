@@ -16,6 +16,8 @@ import org.supercsv.io.CsvBeanReader;
 import org.supercsv.io.ICsvBeanReader;
 import org.supercsv.prefs.CsvPreference;
 
+import com.quizmania.client.Game;
+
 
 public class ConfigurationUtil {
 

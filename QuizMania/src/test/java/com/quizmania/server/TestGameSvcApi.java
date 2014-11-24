@@ -36,11 +36,12 @@ public class TestGameSvcApi {
 
 		MockitoAnnotations.initMocks(this);
 		// adding Mock repository
-		GameRepositoryInit.addRepository(games);
+		GameRepositoryInit rep=new GameRepositoryInit();
+		rep.addRepository(games);
 		gamecontroller.addRepository(games);
 		
 			try{
-				GameRepositoryInit.create();
+				rep.create();
 			}catch(Exception e){
 				logger.error("Can't create new repository");
 				e.printStackTrace();

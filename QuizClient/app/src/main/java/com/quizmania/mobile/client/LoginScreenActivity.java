@@ -73,7 +73,7 @@ public class LoginScreenActivity extends Activity {
 				// can talk to the server, open up the video listing
 				startActivity(new Intent(
 						LoginScreenActivity.this,
-						VideoListActivity.class));
+						GameListActivity.class));
 			}
 
 			@Override

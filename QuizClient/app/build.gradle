@@ -21,7 +21,7 @@ android {
 
 
 dependencies {
-    compile project(":QuizMania")
+    compile project(":QuizManiaCommon")
 
     compile("com.jakewharton:butterknife:5.1.2")
     compile fileTree(dir: "libs", include: ["*.jar"])

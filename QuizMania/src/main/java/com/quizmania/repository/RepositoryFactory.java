@@ -12,7 +12,7 @@ public class RepositoryFactory {
 	
 	@Autowired
 	private ScoreBoardRepository scoreboard;
-	@Autowired
+	
 	private static RepositoryFactory rf;//=new RepositoryFactory();
 	
 	//public RepositoryFactory getFactory(){return rf;}

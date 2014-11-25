@@ -1,0 +1,69 @@
+var1,var2,var3,var4,answer,description,rate,Level,Odd_Movie_String,Type
+American Pie,Mean Girls,Titanic,The Breakfast Club,3,By Genre: Titanic is not a High school movie,0,0,Titanic,Genre
+The Hunger Games,Breakfast at Tiffanies,Slumdog Millionaire,Django Unchained,2,"By Age: While the others movies are quite recent, Breakfast at Tiffany's is a very old movie",0,0,Breakfast at Tiffanies,Age
+Unbreakable,The Sixth Sense,The Village,12 Monkeys,4,By Director: 12 Monkeys is not a movie by M. Night Shyamalan,0,0,12 Monkeys,Director
+Monsters Inc.,Toy Story,Shrek,Finding Nemo,3,By Studio: Shrek is not a movie by Pixar,0,0,Shrek,Studio
+Zombieland,Saw,Dawn of the Dead,28 Days Later,2,By Subgenre: Saw is not a zombie movie,0,0,Saw,Subgenre
+The Shining,Pet Sematary,It,Poltergeist,4,By Writer: Poltergeist is not based on a Stephen King book,0,0,Poltergeist,Writer
+The Matrix,X-Men: Days of Future Past,Forrest Gump,Lucy,3,By Genre: Forrest Gump is not a science Fiction movie,0,0,Forrest Gump,Genre
+Taken,Run,Leon: The Professional,The Transporter,3,By Director: Leon: The Professional is not a movie by Luc Besson,0,0,Leon: The Professional,Director
+Mad Max,The Year of Living Dangerously,Braveheart,Revolutionary Road,4,By Actor: Mel Gibson does not appear in Revolutionary Road,0,0,Revolutionary Road,Actor
+Avatar,Spiderman,Superman,My Name is Khan,4,By Origin: My Name is Khan is the only Bollywood movie,0,0,My Name is Khan,Origin
+House of Wax,Cast Away,Paa,What Lies Beneath,3,By Origin: Paa is the only Bollywood movie,0,0,Paa,Origin
+Maverick,Rounders,21,Good Will Hunting,4,By Genre: Good Will Hunting is not a card movie,0,0,Good Will Hunting,Genre
+Red State,Clerks,Tusk,Office Space,4,By Director: Kevin Smith has directed all the movies except Office Space.,0,0,Office Space,Director
+Titanic,Gladiator,American Beauty,King's Speech,1,"By Oscar Win: All the rest, won best movie and best Actor ",0,0,Titanic,Oscar Win
+München ,The Last King of Scotland,Argo,The Town,4,By Background: The Town is the only one not based on a real life event,0,0,The Town,Background
+The Matador,GoldenEye,Moonraker,GoldenEye,1,By Character: The Matador is not a James Bond movie,0,0,The Matador,Character
+The Pledge,The Wolf of Wall Street,Mars Attacks!,One Flew Over the Cuckoo's Nest,2,By Actor: The Wolf of Wall Street is the only one without Jack Nicholson ,0,0,The Wolf of Wall Street,Actor
+JFK,Sleepers,Goodfellas,A Few Good Men,3,By Actor: Kevin Bacon does not appear in Goodfellas.,0,0,Goodfellas,Actor
+Ghosts of Mississippi,JFK,This is Spinal Tap,Stand By Me,2,By Director: Rob Reiner did not direct JFK.,0,0,JFK,Director
+Tom Jones,Rocky,Citizen Kane,The Greatest Show on Earth,3,By Oscar Win: Citizen Kane did not win Best Picture,0,0,Citizen Kane,Oscar Win
+James Mason,Cary Grant,Rod Taylor,Sean Connery,4,By Actor: All but Sean Connery turned down the James Bond role.,0,0,Sean Connery,Actor
+Waterworld,Gigli,The Postman,Mars Needs Moms,1,"By Success: While Waterworld is considered a flop, it actually turned a significant profit. The others lost money.",0,0,Waterworld,Success
+Superman,Batman,Spiderman,Hulk,2,"By Story: Batman does not have any ""super"" powers",0,0,Batman,Story
+The Thomas Crowne Affair,Entrapment,Cowboys vs. Aliens,Master and Commander: The Far Side of the World,4,By Actor: All but Master and Commander: The Far Side of the World featured an actor who played James Bond,0,0,Master and Commander: The Far Side of the World,Actor
+Kill Bill Vol1,Reservoir Dogs,Inglorious Basterds,Schindler's List,4,By Director: Quentin Tarantino did not worked in Schindler's List,0,0,Schindler's List,Director
+Jaws,E.T.,Jurassic Park,King Kong,4,By Director: King Kong was not directed by Steven Spielberg,0,0,King Kong,Director
+Terminator,Commando,Rocky,Predator,3,By Actor: Arnold Schwarzenegger was not in Rocky,0,0,Rocky,Actor
+Saving Private Ryan,Black Hawk Down,La Vita e bella,The thin red line,2,By Subgenre: Black Hawk Down is not set in World War II,0,0,Black Hawk Down,Subgenre
+Roman Polanski,Stanley Kubric,Steven Spielberg,Martin Scorcese,2,By Director: All but Stanley Kubric are alive,0,0,Stanley Kubric,Director
+The Matrix,Pulp Fiction,Mad Max,The Godfather,2,By Movie Trilogy: Pulp Fiction is the only one not part of a trilogy,0,0,Pulp Fiction,Movie Trilogy
+Black Swan,Melancholia,Virgin Suicides,Marie Antoinette,1,By Actor: Black Swan is starred by Natalie Portman while the others are starred by Kirsten Dunst,0,0,Black Swan,Actor
+Training Day,Man on Fire,Departed,Deja Vu,3,By Actor: Denzel Washington does not appear in Departed,0,0,Departed,Actor
+A Dangerous Method ,Inglourious Basterds,Prometheus,The Grand Budapest Hotel,4,By Actor: Michael Fassbender appears in all but The Grand Budapest Hotel where Ralph Fiennes stars,0,0,The Grand Budapest Hotel,Actor
+X-Men,X-Men 2,X-Men: The Last Stand,X-Men: Days of Future Past,3,By Director: All but X-Men: Last Stand were directed by Bryan Singer,0,0,X-Men: The Last Stand,Director
+The Fellowship of the Ring,The Two Towers,The Return of the King,An Unexpected Journey,4,By Series: An Unexpected Journey is part of The Hobbit trilogy,0,0,An Unexpected Journey,Series
+Moneyball,World War Z,Megamind,Mission: Impossible - Ghost Protocol,4,By Actor: Brad Pitt did not appear in Mission: Impossible - Ghost Protocol,0,0,Mission: Impossible - Ghost Protocol,Actor
+The Dark Knight Rises,The Avengers,The Amazing Spider-Man,The Incredible Hulk,4,By Year: All but The Incredible Hulk are 2012 movies,0,0,The Incredible Hulk,Year
+Iron Man,The Amazing Spider-Man,Captain America: The First Avenger,The Dark Knight,4,By Publisher: All but The Dark Knight are part of the Marvel Universe,0,0,The Dark Knight,Publisher
+Carrie,Alien,Saw,Titanic,4,By Genre: All but Titanic are Horrors,0,0,Titanic,Genre
+12 Monkeys,Mr. Nobody,Butterfly Effect,The Aviator,4,By Theme: All but The Aviator involve time travelling plots,0,0,The Aviator,Theme
+Family Guy,American Dad,Cleveland Show,South Park,4,By Creator: All but South Park are created by Seth MacFarlene,0,0,South Park,Creator
+Horrible Bosses,Minority Report,In Bruges,The Departed,4,By Actor: Colin Farrell did not appear in The Departed,0,0,The Departed,Actor
+The Hunger Games,Kill Bill,Salt,The Social Network,4,By Actor: All but The Social Network have a female lead role,0,0,The Social Network,Actor
+Total Recall,Dredd,Alien,Back to the Future I,4,By Time: All but Back to the Future I take place in the future,0,0,Back to the Future I,Time
+The Godfather,Scarface,Dog Day Afternoon,Casino,4,By Actor: Al Pacino does not appear on Casino,0,0,Casino,Actor
+Goodfellas,Casino,Taxi Driver,Scarface,4,By Actor: Robert de Niro does not apppear on Scarface,0,0,Scarface,Actor
+Exodus: Gods and Kings,Ben Hur,The Passion of Christ,Cleopatra,4,By Theme: All but Cleopatra were based on biblical stories,0,0,Cleopatra,Theme
+Charade,Psycho,Rear Window,Vertigo,1,By Director: All but Charade were directed by Alfred Hitchcock,0,0,Charade,Director
+2001: A space Odyssey,"20,000 Leagues Under the Sea",2012,2010: Moby Dick,2,"By Title: Distance, not time",0,0,"20,000 Leagues Under the Sea",Title
+Harry Potter and the Philosopher's Stone,Harry Potter and the Chamber of Secrets,Harry Potter and the Prisoner of Azkaban,First Blood,4,By Theme: All but First Blood are Harry Potter movies.,0,0,First Blood,Theme
+Resident Evil,The Fifth Element,The Three Musketeers,Sin City,4,By Actor: Milla Jovovich does not appear in Sin City,0,0,Sin City,Actor
+Goal,Escape to Victory,The Game of their Lives,Any Given Sunday,4,By Theme: All but Any Given Sunday are about football,0,0,Any Given Sunday,Theme
+Ender's Game,Star Wars - A new Hope,The Punisher,Star Trek II - Wrath of Khan,3,By Theme: All the movies but The Punisher are Science-Fiction movies.,0,0,The Punisher,Theme
+Apocalypse Now,Guadalcanal,Midway,Patton,1,By Theme: All the films but the first one are related to the WWII,0,0,Apocalypse Now,Theme
+Ben-Hur: A Tale of the Christ,Citizen Kane,The Plastic Age,Gone With The Wind,2,By Actor: All but Citizen Kane were starred by Clark Gable,0,0,Citizen Kane,Actor
+Dirty Dancing,Commando,The Goonies,The Return of the Living Dead,1,By Year: All but Dirty Dancing were released in 1985,0,0,Dirty Dancing,Year
+Bean,Scooby-Doo,Scooby-Doo 2: Monsters Unleashed,Rat Race,3,By Actor: Rowan Atkinson did not appear in Scooby-Doo 2.,0,0,Scooby-Doo 2: Monsters Unleashed,Actor
+Toy Story,Cars,Finding Nemo,Elfen Lied,4,By Genre: Elfen Lied is anime,0,0,Elfen Lied,Genre
+True Lies,Red Heat,Rambo,Terminator,3,By Actor: Arnold Schwarzenegger does not appear in Rambo,0,0,Rambo,Actor
+Frankenweenie,The Corpse Bride,The Nightmare Before Christmas,Coraline,4,By Director: All but Coraline were directed by Tim Burton,0,0,Coraline,Director
+Sixteen Candles,The Breakfast Club,War Games,Ferris Bueller's Day Off,3,By Director: All but War Games were directed by John Hughes,0,0,War Games,Director
+Rock and Rule,American Pop,Wizards,Fire and Ice,1,By Director: All but Rock and Rule were directed by Ralph Bakshi,0,0,Rock and Rule,Director
+Gung Ho,Parenthood,Mr Mom,Beetlejuice,2,By Actor: Michael Keaton did not appear in Parenthood,0,0,Parenthood,Actor
+The Wind Rises,My Neighbor Totoro,Tales from Earthsea,Porco Rosso,3,By Director: All but Tales from Earthsea were directed by Hayao Miyazaki,0,0,Tales from Earthsea,Director
+The Number 4,The Number 2,The Number 23,The Number 6,3,By Title: The number 23 is an actual movie title.   It's also the only odd number.,0,0,The Number 23,Title
+Frozen,Cinderella,Snow White,True Grit,4,By Genre: True Grit is the only western.,0,0,True Grit,Genre
+True Grit,Blazing Saddles,Dances With Wolves,The Lion King,4,By Genre: All are westerns except for The Lion King,0,0,The Lion King,Genre
+Da Vinci Code,Amelie,Sabrina,The Fifth Element,4,By Location: All are set in Paris except the Fifth Element,0,0,The Fifth Element,Location

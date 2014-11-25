@@ -182,11 +182,13 @@ public class OAuth2SecurityConfiguration {
 			
 			// Require clients to login and have an account with the "user" role
 			// in order to send a POST request to /video
-			// http.authorizeRequests().antMatchers(HttpMethod.POST, "/video").hasRole("user");
-			
+			 http.authorizeRequests().antMatchers(HttpMethod.GET, "/games/populate").hasRole("admin");
+			 http.authorizeRequests().antMatchers(HttpMethod.POST, "/games").hasRole("admin");
+			 http.authorizeRequests().antMatchers(HttpMethod.PUT, "/games").hasRole("user");
+			 
 			// We force clients to authenticate before accessing ANY URLs 
 			// other than the login and lougout that we have configured above.
-			//http.authorizeRequests().anyRequest().authenticated();
+			http.authorizeRequests().anyRequest().authenticated();
 		}
 		
 		@Override

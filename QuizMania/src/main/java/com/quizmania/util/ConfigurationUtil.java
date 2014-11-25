@@ -22,7 +22,7 @@ import com.quizmania.client.Game;
 public class ConfigurationUtil {
 
 	
-	private final static String QUIZ_FILE = "quizes.csv";
+	private final static String QUIZ_FILE = "quizes_2.csv";
 	private final static Logger logger=Logger.getLogger(ConfigurationUtil.class);
 	private static Set<String> SetOfUUID = new HashSet<String>();
 	
@@ -32,12 +32,14 @@ public class ConfigurationUtil {
 				// new UniqueHashCode(), // customerNo (must be unique)
 				new NotNull(), // Movie 1
 				new NotNull(), // Movie 2
-				// new ParseDate("dd/MM/yyyy"), // birthDate
 				new NotNull(), // Movie 3
 				new NotNull(), // Movie 4
 				new ParseInt(), // Odd Movie
 				new NotNull(), // Description
-				new Optional(new ParseInt()) // loyaltyPoints
+				new Optional(new ParseInt()), // Rate
+				new Optional(new ParseInt()), // Level (complicity?)
+				new NotNull(), // Odd_Movie_String
+				new NotNull() // Genre
 		};
 
 		return processors;
@@ -62,7 +64,7 @@ public class ConfigurationUtil {
 						"lineNo=%s, rowNo=%s, customerMap=%s",
 						mapReader.getLineNumber(), mapReader.getRowNumber(),
 						game));
-				game.setId(getUUID());
+				//game.setGameId(getUUID());// we don't need it - Id adds DynamoDBService automatically
 				games.add(game);
 			}
 		}

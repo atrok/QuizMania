@@ -24,6 +24,7 @@ public class TestGameSvcApi {
 	private final static Logger logger=Logger.getLogger(TestGameSvcApi.class);
 	List<Game> quiz = null;
 	Set<String> SetOfUUID = new HashSet<String>();
+	GameRepositoryInit rep=new GameRepositoryInit();
 	
 	@Mock
 	GameRepository games;
@@ -36,7 +37,14 @@ public class TestGameSvcApi {
 
 		MockitoAnnotations.initMocks(this);
 		// adding Mock repository
-		GameRepositoryInit rep=new GameRepositoryInit();
+		
+
+		
+	}
+	
+	@Test
+	public void test() {
+
 		rep.addRepository(games);
 		gamecontroller.addRepository(games);
 		
@@ -47,14 +55,8 @@ public class TestGameSvcApi {
 				e.printStackTrace();
 				throw e;
 			}
+			
 		
-	}
-	
-	@Test
-	public void test() {
-
-		
-		Game g = new Game("test", "test2", "test3", "test4", 2, "test quiz: answer 2", 0);
 		g.setId(ConfigurationUtil.getUUID());
 		boolean ok = gamecontroller.addGameRecord(g);
 
@@ -62,8 +64,11 @@ public class TestGameSvcApi {
 
 		assertTrue(ok);
 
-		List<Game> gameslist = Lists.newArrayList(games.findAll());
+		if (null!=games){
+			Iterable<Game> res= games.findAll();
+					List<Game> gameslist = Lists.newArrayList(res);
 		assertTrue(gameslist.contains(g));
+		}
 	}
 
 }

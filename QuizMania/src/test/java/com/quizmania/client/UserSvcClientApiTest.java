@@ -100,7 +100,7 @@ public class UserSvcClientApiTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testVideoAddAndList() throws Exception {
+	public void testUserAddAndList() throws Exception {
 		// Add the video
 		try{
 		userService.addUser(user);

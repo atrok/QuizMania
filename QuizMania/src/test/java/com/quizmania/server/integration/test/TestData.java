@@ -46,7 +46,7 @@ public class TestData {
 		int answer=r.nextInt(3);
 		String description=UUID.randomUUID().toString();
 		int rate=r.nextInt(1);
-		return new Game(var1,var2,var3,var4,answer,description,rate);
+		return new Game(var1,var2,var3,var4,answer,description,rate,0,"odds","genre");
 	}	
 	/**
 	 *  Convert an object to JSON using Jackson's ObjectMapper

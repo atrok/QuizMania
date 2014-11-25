@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
@@ -21,7 +24,9 @@ public interface GameSvcApi {
 	public static final String DURATION_PARAMETER = "duration";
 
 	// The path where we expect the VideoSvc to live
-	public static final String GAME_SVC_PATH = "/game";
+	public static final String GAME_SVC_PATH = "/games";
+	
+	public static final String GAME_POPULATE_PATH=GAME_SVC_PATH+"/populate";
 
 	public static final String TOKEN_PATH = "/oauth/token";
 	//
@@ -36,6 +41,10 @@ public interface GameSvcApi {
 	@POST(value=GAME_SVC_PATH)
 	public boolean addGameRecord( @Body Game g);
 	
+	@PUT(value=GAME_SVC_PATH)
+	public boolean updateGameRecord( @Body Game g);
+	
+	
 	@GET(GAME_SVC_PATH+"/{gameId}/scoreboard/")
 	public Collection<ScoreBoard> getlistofResultsPerGame(@Path("gameId") String gameId);
 	
@@ -44,6 +53,9 @@ public interface GameSvcApi {
 	
 	@GET(GAME_SVC_PATH+"/scoreboard/")
 	public Collection<ScoreBoard> getlistofCombinedResults(@Query("gameId") String gameId, @Query("userId") String userId);
+	
+	@GET(GAME_POPULATE_PATH)
+	public boolean populate() throws IOException;
 	
 	
 	

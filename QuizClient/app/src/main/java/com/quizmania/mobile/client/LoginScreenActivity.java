@@ -1,6 +1,7 @@
 package com.quizmania.mobile.client;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import android.app.Activity;
@@ -12,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.quizmania.client.GameSvcApi;
-import com.quizmania.repository.Game;
+import com.quizmania.client.Game;
 
 import org.magnum.videoup.client.R;
 
@@ -58,16 +59,16 @@ public class LoginScreenActivity extends Activity {
 
 		final GameSvcApi svc = GameSvc.init(server, user, pass);
 
-		CallableTask.invoke(new Callable<Collection<MediaStore.Video>>() {
+		CallableTask.invoke(new Callable<List<Game>>() {
 
 			@Override
-			public Collection<Game> call() throws Exception {
-				return svc.getVideoList();
+			public List<Game> call() throws Exception {
+				return svc.getListOfGames();
 			}
-		}, new TaskCallback<Collection<MediaStore.Video>>() {
+		}, new TaskCallback<List<Game>>() {
 
 			@Override
-			public void success(Collection<MediaStore.Video> result) {
+			public void success(List<Game> result) {
 				// OAuth 2.0 grant was successful and we
 				// can talk to the server, open up the video listing
 				startActivity(new Intent(

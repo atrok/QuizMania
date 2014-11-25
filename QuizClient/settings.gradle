@@ -1,4 +1,4 @@
 include ':app'
 
-include ':QuizMania'
-project(':QuizMania').projectDir = new File(settingsDir, '../QuizMania')
+include ':QuizManiaCommon'
+project(':QuizManiaCommon').projectDir = new File(settingsDir, '../QuizManiaCommon')

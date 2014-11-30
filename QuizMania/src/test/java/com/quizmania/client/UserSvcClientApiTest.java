@@ -66,20 +66,20 @@ public class UserSvcClientApiTest {
 	
 	private ErrorRecorder error=new ErrorRecorder();
 	
-	private UserSvcApi userService = new RestAdapter.Builder()
+	private GameSvcApi userService = new RestAdapter.Builder()
 			.setClient(new ApacheClient(UnsafeHttpsClient.createUnsafeClient()))
 			.setEndpoint(TEST_URL).setLogLevel(LogLevel.FULL)
 			.setErrorHandler(error).build()
-			.create(UserSvcApi.class);
+			.create(GameSvcApi.class);
 
-	private UserSvcApi authUserService = new SecuredRestBuilder()
+	private GameSvcApi authUserService = new SecuredRestBuilder()
 			.setLoginEndpoint(TEST_URL + GameSvcApi.TOKEN_PATH)
 			.setUsername(USERNAME)
 			.setPassword(PASSWORD)
 			.setClientId(CLIENT_ID)
 			.setClient(new ApacheClient(UnsafeHttpsClient.createUnsafeClient()))
 			.setEndpoint(TEST_URL).setLogLevel(LogLevel.FULL).build()
-			.create(UserSvcApi.class);
+			.create(GameSvcApi.class);
 
 	private UserSvcApi invalidClientVideoService = new SecuredRestBuilder()
 			.setLoginEndpoint(TEST_URL + GameSvcApi.TOKEN_PATH)

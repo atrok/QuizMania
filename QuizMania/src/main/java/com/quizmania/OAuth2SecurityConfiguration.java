@@ -165,6 +165,8 @@ public class OAuth2SecurityConfiguration {
 			// POST requests to /user is user creation requests, so it could be anonymous
 			http.authorizeRequests().antMatchers(HttpMethod.POST, "/user")
 			.anonymous();
+			
+			http.authorizeRequests().antMatchers("/user/*").hasRole("user");
 						
 			// Make sure that clients can logout too!!
 			http.logout()
@@ -234,6 +236,10 @@ public class OAuth2SecurityConfiguration {
 				.antMatchers(HttpMethod.POST,"/user/*")
 				.access("#oauth2.hasScope('write')");
 			
+			http
+			.authorizeRequests()
+				.antMatchers(HttpMethod.GET,"/user/*")
+				.access("#oauth2.hasScope('read')");
 
 			// If you were going to reuse this class in another
 			// application, this is one of the key sections that you

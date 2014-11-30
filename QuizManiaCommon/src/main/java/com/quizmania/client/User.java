@@ -4,12 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 
-@DynamoDBTable(tableName = "User")
+
+//@DynamoDBTable(tableName = "User")
 public class User{
 
 
@@ -49,12 +47,12 @@ public class User{
 	}
 
 
-	@DynamoDBAttribute
+//	@DynamoDBAttribute
 	public String getFirstName() {
 		return firstName;
 	}
 
-	@DynamoDBAttribute
+//	@DynamoDBAttribute
 	public String getLastName() {
 		return lastName;
 	}
@@ -71,7 +69,7 @@ public class User{
 		return false;
 	}
 	
-	@DynamoDBHashKey
+//	@DynamoDBHashKey
 	public String getUserName() {
 		return userName;
 	}
@@ -80,7 +78,7 @@ public class User{
 		this.userName = username;
 	}
 
-	@DynamoDBAttribute
+//	@DynamoDBAttribute
 	public String getEmail() {
 		return email;
 	}

@@ -1,10 +1,8 @@
 package com.quizmania.client;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -34,6 +32,31 @@ public interface GameSvcApi {
 	//
 	public static final String LOGOUT_PAGE="/logout";
 
+	public static final String USERNAME="username";
+	public static final String FIRSTNAME="firstname";
+	public static final String LASTNAME="lastname";
+	public static final String EMAIL="email";
+	public static final String PASSWORD="password";
+	public static final String USERID = "userid";	
+	
+	public static final String USER_SVC_PATH = "/user";
+
+
+	@GET(USER_SVC_PATH)
+	public List<User> getUsersList() throws IOException;
+	
+	//@ExceptionHandler(UserException.class)
+	@POST(value=USER_SVC_PATH)
+	public boolean addUser( @Body User g); //throws UserException;
+	
+	@POST(value=USER_SVC_PATH+"/update")
+	public boolean updateUser( @Body User g);
+	
+	@POST(value=USER_SVC_PATH+"/delete")
+	public boolean deleteUser( @Body User g);
+	
+	@GET(value=USER_SVC_PATH+"/{userId}/login")
+	public List<ScoreBoard> login(@Path("userId") String userId);
 	
 	@GET(GAME_SVC_PATH)
 	public List<Game> getListOfGames() throws IOException;
@@ -46,17 +69,19 @@ public interface GameSvcApi {
 	
 	
 	@GET(GAME_SVC_PATH+"/{gameId}/scoreboard/")
-	public Collection<ScoreBoard> getlistofResultsPerGame(@Path("gameId") String gameId);
+	public List<ScoreBoard> getlistofResultsPerGame(@Path("gameId") String gameId);
 	
-	@GET(GAME_SVC_PATH+"/{userId}/scoreboard/")
-	public Collection<ScoreBoard> getlistofResultsPerUser(@Path("userId") String userId);
+	@GET(USER_SVC_PATH+"/{userId}/scoreboard")
+	public List<ScoreBoard> getlistofResultsPerUser(@Path("userId") String userId);
 	
 	@GET(GAME_SVC_PATH+"/scoreboard/")
-	public Collection<ScoreBoard> getlistofCombinedResults(@Query("gameId") String gameId, @Query("userId") String userId);
+	public List<ScoreBoard> getlistofCombinedResults(@Query("gameId") String gameId, @Query("userId") String userId);
 	
 	@GET(GAME_POPULATE_PATH)
 	public boolean populate() throws IOException;
 	
+	@GET(value="/games/scoreboard")
+	public List<ScoreBoard> getlistofResults() throws IOException;
 	
 	
 }

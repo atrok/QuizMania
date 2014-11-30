@@ -2,6 +2,7 @@ package com.quizmania.server;
 
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,23 +10,31 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import retrofit.http.Body;
+import retrofit.http.POST;
+
 import com.google.common.collect.Lists;
 import com.quizmania.client.Game;
 import com.quizmania.client.GameSvcApi;
 import com.quizmania.client.ScoreBoard;
+import com.quizmania.client.User;
 import com.quizmania.repository.GameRepository;
 import com.quizmania.repository.RepositoryFactory;
 import com.quizmania.repository.ScoreBoardRepository;
+import com.quizmania.repository.UserRepository;
 import com.quizmania.util.GameRepositoryInit;
 
 @Controller
-public class GameController implements GameSvcApi{
+public class GameController {
 
 	private final static Logger logger = Logger.getLogger(GameController.class);
 	
@@ -34,6 +43,8 @@ public class GameController implements GameSvcApi{
 	
 	@Autowired
 	private ScoreBoardRepository scoreboards;
+	
+
 	
 	@RequestMapping(value="/games",method=RequestMethod.GET)
 	public @ResponseBody List<Game> getListOfGames(HttpServletResponse resp) throws IOException{
@@ -45,10 +56,17 @@ public class GameController implements GameSvcApi{
 						);
 		
 		
-        resp.setContentType("text/html");
-        resp.sendError(404, "Game repository object is not initialized");
+        sendHTTPError(resp, 404, "Game repository object is not initialized");
         
 		return null;
+	}
+	
+	@RequestMapping(value = "/user/{name}/login", method=RequestMethod.POST)
+	public @ResponseBody List<ScoreBoard> login(@PathVariable("name") String name){
+		
+		
+		return Lists.newArrayList(scoreboards.findByUserId(name));
+		
 	}
 	
 	@RequestMapping(value = "/games/populate", method = RequestMethod.GET)
@@ -99,25 +117,43 @@ public class GameController implements GameSvcApi{
 		return addGameRecord(g);
 	}
 	
-	@Override
 	public Collection<ScoreBoard> getlistofResultsPerGame(String gameId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Collection<ScoreBoard> getlistofResultsPerUser(String userId) {
+	@RequestMapping(value=GameSvcApi.USER_SVC_PATH+"/{userId}/scoreboard",method=RequestMethod.GET)
+	public @ResponseBody List<ScoreBoard> getlistofResultsPerUser(@PathVariable("userId") String userId, HttpServletResponse resp) throws IOException {
 		// TODO Auto-generated method stub
-		return null;
+		List<ScoreBoard> res=Lists.newArrayList(scoreboards.findByUserId(userId));
+		if (res.size()==0){// we check list of results of user and if there is no records per user we create empty one for future references
+			ScoreBoard sb=scoreboards.save(new ScoreBoard(userId,0,0,""));
+			res.add(sb);
+		}
+		return res;
+
 	}
 
-	@Override
 	public Collection<ScoreBoard> getlistofCombinedResults(String gameId,
 			String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@RequestMapping(value="/games/scoreboard",method=RequestMethod.GET)
+	public @ResponseBody Collection<ScoreBoard> getlistofResults(HttpServletResponse resp) throws IOException {
+		if (null!=scoreboards)
+			return Lists.newArrayList(
+					scoreboards.findAll()
+					);
 	
+	
+    resp.setContentType("text/html");
+    resp.sendError(404, "Game repository object is not initialized");
+    
+	return null;	
+	
+	}
 	/*
 	 * for testing purposes only
 	 */
@@ -126,12 +162,10 @@ public class GameController implements GameSvcApi{
 		this.games=games;
 	}
 
-	@Override
-	public List<Game> getListOfGames() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+
+	private void sendHTTPError(HttpServletResponse resp, int errcode, String msg) throws IOException{
+        resp.setContentType("text/html");
+        resp.sendError(errcode, msg);
 	}
-
-
 		
 }

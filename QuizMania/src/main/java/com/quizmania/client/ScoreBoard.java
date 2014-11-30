@@ -15,6 +15,8 @@ public class ScoreBoard {
 	private int GameLoss=0;
 	
 	//private int GameGuess=0;
+	public ScoreBoard(){}
+	
 	public ScoreBoard(String userId, int GameWin, int GameLoss, String gameId){
 		this.userId=userId;
 		this.gameId=gameId;
@@ -28,6 +30,20 @@ public class ScoreBoard {
 		return boardId;
 	}
 	
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public void setGameId(String gameId) {
+		this.gameId = gameId;
+	}
+
+	public void setboardId(String boardId) {
+		this.boardId = boardId;
+	}
+
 	@DynamoDBAttribute
 	public int getGameWin() {
 		return GameWin;

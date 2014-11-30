@@ -28,7 +28,7 @@
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:text="pass" />
+        android:text="none" />
 
     <Button
         android:id="@+id/loginButton"
@@ -38,6 +38,24 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:text="@string/login" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_centerHorizontal="true"
+        android:text="or"
+        android:id="@+id/or"
+        android:layout_below="@id/loginButton"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/signinButton"
+        android:layout_below="@id/or"
+        android:onClick="login"/>
 
     <EditText
         android:id="@+id/server"

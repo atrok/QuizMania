@@ -85,15 +85,28 @@ public void onActivityCreated(Bundle savedInstanceState){
     );
 
 }
+
+    private int getRadioButtonIndex(int id){
+        RadioGroup rg=(RadioGroup)getActivity().findViewById(R.id.radioGroup);
+
+        int rgid;
+        int index=Integer.MAX_VALUE-1;
+        for(int i = 0; i < rg.getChildCount(); i++) {
+            rgid=rg.getChildAt(i).getId();
+            if (id==rgid) {
+                return index=++i;
+            }
+        }
+        return index;
+    }
+
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
 
-        // Check which radio button was clicked
-        int id=view.getId();
 
         // let Activity know of right answer
-        if (g.getAnswer()!=id) {
+        if (g.getAnswer()!=getRadioButtonIndex(view.getId())){
             view.setBackgroundColor(Color.RED);
 
             mListener.onSelected(false);
@@ -103,14 +116,11 @@ public void onActivityCreated(Bundle savedInstanceState){
             mListener.onSelected(true);
         }
 
-        RadioGroup rg=(RadioGroup)getActivity().findViewById(R.id.radioGroup);
+
 
         // place correct answer
 
-        TextView text = new TextView(getActivity());
-        int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                4, getActivity().getResources().getDisplayMetrics());
-        text.setPadding(padding, padding, padding, padding);
+        TextView text = (TextView)getActivity().findViewById(R.id.textAnswer);
         text.setText(g.getDescription());
     }
 

@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.Callable;
 
 import android.app.Activity;
@@ -27,6 +29,8 @@ import com.quizmania.client.User;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import retrofit.RestAdapter;
+import retrofit.client.ApacheClient;
 
 /**
  * 
@@ -88,6 +92,7 @@ public class LoginScreenActivity extends Activity {
                 .build();
 
 		final GameSvcApi svc = GameSvc.init(server, user, pass);
+        final GameSvcApi svcUnsafe = GameSvc.initUnsafe(server, user, pass);
 
 
         boolean cancel = false;
@@ -159,12 +164,16 @@ public class LoginScreenActivity extends Activity {
                 });
                     break;
                 case R.id.signinButton:
-
                     CallableTask.invoke(new Callable<List<ScoreBoard>>() {
 
                         @Override
                         public List<ScoreBoard> call() throws Exception {
-                            svc.addUser(new User(user, pass));
+                            User u=new User(user, pass);
+                            Set roles=new TreeSet();
+                            roles.add("ROLE_USER");
+                            u.setRole(roles);
+
+                            svcUnsafe.addUser(u);
                             List<ScoreBoard> sb = new ArrayList<ScoreBoard>();
                             sb.add(new ScoreBoard(user,0,0,null));
                             return sb;

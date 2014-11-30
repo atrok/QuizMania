@@ -11,8 +11,8 @@ public class ScoreBoard {
 	private String boardId;
 	private String userId;
 	private String gameId;
-	private int GameWin=0;
-	private int GameLoss=0;
+	private int gameWin=0;
+	private int gameLoss=0;
 	
 	//private int GameGuess=0;
 	public ScoreBoard(){}
@@ -20,8 +20,8 @@ public class ScoreBoard {
 	public ScoreBoard(String userId, int GameWin, int GameLoss, String gameId){
 		this.userId=userId;
 		this.gameId=gameId;
-		this.GameWin=GameWin;
-		this.GameLoss=GameLoss;
+		this.gameWin=GameWin;
+		this.gameLoss=GameLoss;
 	}
 	
 	@DynamoDBHashKey
@@ -46,20 +46,20 @@ public class ScoreBoard {
 
 	@DynamoDBAttribute
 	public int getGameWin() {
-		return GameWin;
+		return gameWin;
 	}
 
 	public void setGameWin(int gameWin) {
-		GameWin = gameWin;
+		this.gameWin = gameWin;
 	}
 
 	@DynamoDBAttribute
 	public int getGameLoss() {
-		return GameLoss;
+		return gameLoss;
 	}
 	
 	public void setGameLoss(int gameLoss) {
-		GameLoss = gameLoss;
+		this.gameLoss = gameLoss;
 	}
 
 	@DynamoDBAttribute

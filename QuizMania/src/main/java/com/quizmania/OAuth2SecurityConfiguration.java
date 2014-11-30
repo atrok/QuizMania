@@ -228,6 +228,11 @@ public class OAuth2SecurityConfiguration {
 			.authorizeRequests()
 				.antMatchers("/oauth/token").anonymous();
 			
+			/*
+			http
+			.authorizeRequests()
+				.antMatchers(HttpMethod.POST,"/user/create").anonymous();
+			*/
 			
 
 			//other request like update/delete should have write access only

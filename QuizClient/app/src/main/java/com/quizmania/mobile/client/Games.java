@@ -1,6 +1,7 @@
 package com.quizmania.mobile.client;
 
 import com.quizmania.client.Game;
+import com.quizmania.client.ScoreBoard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  */
 public class Games {
     private List<Game> games=new ArrayList<Game>();
+    private List<ScoreBoard> scoreboards=new ArrayList<ScoreBoard>();
     private static Games gamesObj;
 
     public static Games init(){
@@ -23,4 +25,7 @@ public class Games {
         games=g;
     }
     public List<Game> getGames(){return games;}
+
+    public void addScoreboards(List<ScoreBoard> sb){scoreboards=sb;}
+    public List<ScoreBoard> getScoreboards(){return scoreboards;}
 }

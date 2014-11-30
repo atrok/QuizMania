@@ -43,12 +43,12 @@ import com.quizmania.server.integration.test.UnsafeHttpsClient;
 public class UserSvcClientApiTest {
 
 	private Logger log=Logger.getLogger(UserSvcClientApiTest.class);
-	private final String USERNAME = "admin";
+	private final String USERNAME = "admin@z";
 	private final String PASSWORD = "none";
 	private final String CLIENT_ID = "mobile";
 	private final String READ_ONLY_CLIENT_ID = "mobileReader";
 
-	private final String TEST_URL = "http://localhost:8888";//  we use fiddler port to intercept http request intended for our application running on 8443
+	private final String TEST_URL = "http://localhost:8080";//  we use fiddler port to intercept http request intended for our application running on 8443
 	private class ErrorRecorder implements ErrorHandler {
 
 		private RetrofitError error;

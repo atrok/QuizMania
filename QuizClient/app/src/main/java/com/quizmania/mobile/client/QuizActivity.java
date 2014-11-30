@@ -37,9 +37,9 @@ public class QuizActivity extends Activity implements QuizHolderFragment.OnSelec
     String category;
     Game game;
 
-    private static int curr_game_loss=0;
-    private static int curr_game_win=0;
-    private static int curr_game_count=0; // number of current game;
+    private int curr_game_loss=0;
+    private int curr_game_win=0;
+    private int curr_game_count=0; // number of current game;
     private final static int GAME_LOSS_COUNT=3;
 
 
@@ -89,14 +89,20 @@ public class QuizActivity extends Activity implements QuizHolderFragment.OnSelec
 
         game=getRandomGame();
 
+        ScoreBoard sb=UserDTO.getSb();
+
         if (curr_game_loss==GAME_LOSS_COUNT){
             Toast.makeText(QuizActivity.this,
                     "You lost with "+curr_game_win+" questions out of "+curr_game_count,
                     Toast.LENGTH_LONG).show();
-            return;
+
+
             /*
             todo update Scoreboard with results;
              */
+            updateScoreboard();
+
+            return;
         }
         if(null==game) {
             Toast.makeText(QuizActivity.this,
@@ -105,7 +111,8 @@ public class QuizActivity extends Activity implements QuizHolderFragment.OnSelec
             /*
             todo update ScoreBoard with results
              */
-            return;
+            updateScoreboard();
+         return;
         }
 
 
@@ -115,7 +122,7 @@ public class QuizActivity extends Activity implements QuizHolderFragment.OnSelec
             // Execute a transaction, replacing any existing fragment
             // with this one inside the frame.
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.add(R.id.quizEmbed, quiz);
+            ft.replace(R.id.quizEmbed, quiz);
             // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
 
@@ -124,16 +131,23 @@ public class QuizActivity extends Activity implements QuizHolderFragment.OnSelec
 
     public void onSelected(boolean success){
 
+        curr_game_count++;
+
         if (!success){
-            UserDTO.getSb().setGameLoss(curr_game_loss++);
+            curr_game_loss++;
+            int gameloss_summary= UserDTO.getSb().getGameLoss()+curr_game_loss;
+            UserDTO.getSb().setGameLoss(gameloss_summary);
+
             ((TextView)findViewById(R.id.losstxt)).setText(Integer.toString(curr_game_loss));
             Toast.makeText(
                     this,
-                    "It's incorrect answer, ",
+                    "It's incorrect answer! Rate this question to move on",
                     Toast.LENGTH_LONG).show();
 
         }else{
-            UserDTO.getSb().setGameWin(curr_game_win++);
+            curr_game_win++;
+            int gamewin_summary= UserDTO.getSb().getGameWin()+curr_game_win;
+            UserDTO.getSb().setGameWin(gamewin_summary);
             ((TextView)findViewById(R.id.wintxt)).setText(Integer.toString(curr_game_win));
 
             Toast.makeText(
@@ -150,7 +164,8 @@ public class QuizActivity extends Activity implements QuizHolderFragment.OnSelec
 
          */
 
-        game.setRate((int)rating);
+        final Game  g=game;
+        g.setRate((int)rating);
 
         final GameSvcApi svc = GameSvc.getOrShowLogin(this);
 
@@ -159,7 +174,7 @@ public class QuizActivity extends Activity implements QuizHolderFragment.OnSelec
 
                 @Override
                 public Result call() throws Exception {
-                    return new Result(svc.updateGameRecord(game));
+                    return new Result(svc.updateGameRecord(g));
                 }
             }, new TaskCallback<Result>() {
 
@@ -229,7 +244,45 @@ public class QuizActivity extends Activity implements QuizHolderFragment.OnSelec
     }
 
     private void updateScoreboard(){
-        ScoreBoard sb=UserDTO.getSb();
+        final ScoreBoard sb=UserDTO.getSb();
+
+        final GameSvcApi svc = GameSvc.getOrShowLogin(this);
+
+        if (svc != null) {
+            CallableTask.invoke(new Callable<Result>() {
+
+                @Override
+                public Result call() throws Exception {
+                    return new Result(svc.addScoreboard(sb));
+                }
+            }, new TaskCallback<Result>() {
+
+                @Override
+                public void success(Result result) {
+
+                    /*
+                    nothing to do, we are glad that we succeeded in adding the game rating
+                     */
+                    startActivity(new Intent(QuizActivity.this,ScoreBoardActivity.class));
+
+                }
+
+                @Override
+                public void error(Exception e) {
+                    Toast.makeText(
+                            QuizActivity.this,
+                            "Unable to update player' results.",
+                            Toast.LENGTH_LONG).show();
+
+                    /*
+                    no need to start any new activities
+                    startActivity(new Intent(GameListActivity.this,
+                            LoginScreenActivity.class));
+
+                     */
+                }
+            });
+        }
 
     }
 

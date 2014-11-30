@@ -14,6 +14,7 @@ import com.quizmania.client.GameSvcApi;
 import com.quizmania.client.SecuredRestBuilder;
 
 import retrofit.ErrorHandler;
+import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.ApacheClient;
@@ -26,7 +27,7 @@ public class GameSvc {
 
    private static final String TEST_URL = "http://localhost:8888";//  we use fiddler port to intercept http request intended for our application running on 8443
 
-    private static GameSvcApi gameSvc_;
+    private static GameSvcApi gameSvc_,gameSvcUnsafe_;
 
 
     public static synchronized GameSvcApi getOrShowLogin(Context ctx) {
@@ -56,6 +57,19 @@ public class GameSvc {
 		return gameSvc_;
 	}
 
+    // it's needed when new user is to be created on server
+    public static synchronized GameSvcApi initUnsafe(String server, String user,
+                                               String pass) {
+
+        gameSvcUnsafe_ =
+                new RestAdapter.Builder()
+                        .setClient(new ApacheClient(new EasyHttpClient()))
+                        .setEndpoint(server).setLogLevel(RestAdapter.LogLevel.FULL)
+                        .build()
+                        .create(GameSvcApi.class);
+
+        return gameSvcUnsafe_;
+    }
 
 
 }

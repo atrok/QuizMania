@@ -44,6 +44,9 @@ public class GameController {
 	@Autowired
 	private ScoreBoardRepository scoreboards;
 	
+	@Autowired
+	private UserRepository users;
+	
 
 	
 	@RequestMapping(value="/games",method=RequestMethod.GET)
@@ -110,6 +113,25 @@ public class GameController {
 		Game t=games.save(g);
 		return (g==t);
 	}
+	
+	
+	@RequestMapping(value="/user",method=RequestMethod.POST)
+	public @ResponseBody boolean addUser( @RequestBody User g, HttpServletResponse resp) throws IOException{
+		
+		User a=users.findByUserName(g.getUserName());
+		
+		if (null==a){
+			
+		User t=users.save(g);
+		return (g==t);
+		}else{
+			
+		    sendHTTPError(resp,404, "User with id"+g.getUserName()+" already exists");
+		    
+			return false;
+		}
+	}
+	
 
 	@RequestMapping(value="/games",method=RequestMethod.PUT)
 	public @ResponseBody boolean updateGameRecord( @RequestBody Game g)
@@ -122,6 +144,15 @@ public class GameController {
 		return null;
 	}
 
+    @RequestMapping(value=GameSvcApi.SB_SVC_PATH, method=RequestMethod.POST)
+    public @ResponseBody boolean addScoreboard( @RequestBody ScoreBoard sb){
+    	
+    	ScoreBoard s=scoreboards.save(sb);
+    	
+    	return (s==sb);
+    	
+    }	
+    
 	@RequestMapping(value=GameSvcApi.USER_SVC_PATH+"/{userId}/scoreboard",method=RequestMethod.GET)
 	public @ResponseBody List<ScoreBoard> getlistofResultsPerUser(@PathVariable("userId") String userId, HttpServletResponse resp) throws IOException {
 		// TODO Auto-generated method stub
@@ -133,6 +164,7 @@ public class GameController {
 		return res;
 
 	}
+	
 
 	public Collection<ScoreBoard> getlistofCombinedResults(String gameId,
 			String userId) {

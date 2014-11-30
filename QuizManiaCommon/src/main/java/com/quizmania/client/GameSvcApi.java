@@ -23,7 +23,7 @@ public interface GameSvcApi {
 
 	// The path where we expect the VideoSvc to live
 	public static final String GAME_SVC_PATH = "/games";
-	
+    public static final String SB_SVC_PATH = "/scoreboard";
 	public static final String GAME_POPULATE_PATH=GAME_SVC_PATH+"/populate";
 
 	public static final String TOKEN_PATH = "/oauth/token";
@@ -66,7 +66,9 @@ public interface GameSvcApi {
 	
 	@PUT(value=GAME_SVC_PATH)
 	public boolean updateGameRecord( @Body Game g);
-	
+
+    @POST(value=SB_SVC_PATH)
+    public boolean addScoreboard( @Body ScoreBoard sb);
 	
 	@GET(GAME_SVC_PATH+"/{gameId}/scoreboard/")
 	public List<ScoreBoard> getlistofResultsPerGame(@Path("gameId") String gameId);

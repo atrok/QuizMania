@@ -17,7 +17,7 @@ public class User{
 	private String lastName="";
 	private String password="none";
 	private Set<String> role=new HashSet<String>();
-	private boolean AccountNonExpired=true,AccountNonLocked=true, CredentialsNonExpired=true, Enabled=true;
+	private boolean accountNonExpired=true,accountNonLocked=true, credentialsNonExpired=true, enabled=true;
 	
 	public String getPassword() {
 		return password;
@@ -105,49 +105,49 @@ public class User{
 
 
 	public boolean isAccountNonExpired() {
-		return AccountNonExpired;
+		return accountNonExpired;
 	}
 
 
 
 	public void setAccountNonExpired(boolean accountNonExpired) {
-		AccountNonExpired = accountNonExpired;
+		this.accountNonExpired = accountNonExpired;
 	}
 
 
 
 	public boolean isAccountNonLocked() {
-		return AccountNonLocked;
+		return accountNonLocked;
 	}
 
 
 
 	public void setAccountNonLocked(boolean accountNonLocked) {
-		AccountNonLocked = accountNonLocked;
+		this.accountNonLocked = accountNonLocked;
 	}
 
 
 
 	public boolean isCredentialsNonExpired() {
-		return CredentialsNonExpired;
+		return credentialsNonExpired;
 	}
 
 
 
 	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-		CredentialsNonExpired = credentialsNonExpired;
+		this.credentialsNonExpired = credentialsNonExpired;
 	}
 
 
 
 	public boolean isEnabled() {
-		return Enabled;
+		return enabled;
 	}
 
 
 
 	public void setEnabled(boolean enabled) {
-		Enabled = enabled;
+		this.enabled = enabled;
 	}
 
 }
